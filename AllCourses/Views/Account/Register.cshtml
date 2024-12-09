@@ -1,0 +1,76 @@
+﻿@{
+    Layout = null;
+}
+
+<link href="~/css/output.css" rel="stylesheet" />
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-gray-50">
+    <div class="max-w-md w-full bg-white shadow-lg rounded-2xl p-8 space-y-8 transform transition-all hover:shadow-2xl">
+        <h2 class="text-center text-3xl font-extrabold text-gray-900">
+            Регистрация
+        </h2>
+        <form asp-action="Register" method="post" class="mt-8 space-y-6">
+            <div class="rounded-md shadow-sm space-y-4">
+                <div>
+                    <label for="role" class="block text-sm font-medium text-gray-700">
+                        Тип пользователя
+                    </label>
+                    <select id="role" name="Role"
+                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="">Выберите тип пользователя</option>
+                        <option value="Student">Студент</option>
+                        <option value="Teacher">Преподаватель</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="first-name" class="block text-sm font-medium text-gray-700">
+                        Логин
+                    </label>
+                    <input id="first-name" name="FirstName" type="text" required
+                           class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           placeholder="Логин" />
+                </div>
+
+                <div>
+                    <label for="email-address" class="block text-sm font-medium text-gray-700">
+                        Электронная почта
+                    </label>
+                    <input id="email-address" name="Email" type="email" required
+                           class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           placeholder="Электронная почта" />
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        Пароль
+                    </label>
+                    <input id="password" name="Password" type="password" required
+                           class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           placeholder="Пароль" />
+                </div>
+
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">
+                        Подтверждение пароля
+                    </label>
+                    <input id="confirm-password" name="ConfirmPassword" type="password" required
+                           class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           placeholder="Подтвердите пароль" />
+                </div>
+            </div>
+
+            <div>
+                <button type="submit"
+                        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out">
+                    Зарегистрироваться
+                </button>
+            </div>
+        </form>
+        <p class="mt-2 text-center text-sm text-gray-600">
+            Уже есть аккаунт?
+            <a asp-controller="Account" asp-action="Login" class="font-medium text-indigo-600 hover:text-indigo-500">
+                Войти
+            </a>
+        </p>
+    </div>
+</div>
