@@ -1,4 +1,6 @@
-﻿@{
+﻿@using AllCourses.Models
+@model RegisterViewModel; 
+@{
     Layout = null;
 }
 
@@ -8,13 +10,13 @@
         <h2 class="text-center text-3xl font-extrabold text-gray-900">
             Регистрация
         </h2>
-        <form asp-action="Register" method="post" class="mt-8 space-y-6">
+        <form asp-controller="Account" asp-action="Register" method="post" class="mt-8 space-y-6">
             <div class="rounded-md shadow-sm space-y-4">
                 <div>
-                    <label for="role" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="Role" class="block text-sm font-medium text-gray-700">
                         Тип пользователя
                     </label>
-                    <select id="role" name="Role"
+                    <select asp-for="Role" name="Role"
                             class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="">Выберите тип пользователя</option>
                         <option value="Student">Студент</option>
@@ -23,28 +25,28 @@
                 </div>
 
                 <div>
-                    <label for="first-name" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="UserName" class="block text-sm font-medium text-gray-700">
                         Логин
                     </label>
-                    <input id="first-name" name="FirstName" type="text" required
+                    <input asp-for="UserName" type="text" required
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Логин" />
                 </div>
 
                 <div>
-                    <label for="email-address" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="Email" class="block text-sm font-medium text-gray-700">
                         Электронная почта
                     </label>
-                    <input id="email-address" name="Email" type="email" required
+                    <input asp-for="Email" type="email" required
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Электронная почта" />
                 </div>
 
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="Password" class="block text-sm font-medium text-gray-700">
                         Пароль
                     </label>
-                    <input id="password" name="Password" type="password" required
+                    <input asp-for="Password" type="password" required
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Пароль" />
                 </div>

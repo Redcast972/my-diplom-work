@@ -1,14 +1,21 @@
 using AllCourses.Domain;
 using AllCourses.Domain.Repositories.Abstract;
 using AllCourses.Domain.Repositories.EntityFramevork;
+using AllCourses.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//настраиваем политику авторизации для AdminArea
+builder.Services.AddAuthorization(x =>
+    x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); })
+);
 
 //добавляем сервисы для контроллеров и представлений (MVC)
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+    options.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"))
+);
 
 //Продключаем конфиг из appsettings.json
 //builder.Configuration.Bind("Project", new Config());
@@ -52,22 +59,25 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/Error/ServerError");
     app.UseHsts();
+    app.UseStatusCodePagesWithReExecute("/Error/NotFound");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 }
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseStaticFiles();
 
 app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();
 

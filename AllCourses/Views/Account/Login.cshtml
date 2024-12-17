@@ -1,4 +1,6 @@
-﻿@{
+﻿@using AllCourses.Models
+@model LoginViewModel
+@{
     Layout = null;
 }
 
@@ -9,38 +11,45 @@
             Авторизация
         </h2>
 
-        <form asp-action="Login" method="post" class="mt-8 space-y-6">
+        <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewBag.returnUrl" method="post" class="mt-8 space-y-6">
             <div class="rounded-md shadow-sm space-y-4">
                 <div>
-                    <label for="email-address" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="UserName" class="block text-sm font-medium text-gray-700">
                         Логин
                     </label>
-                    <input id="email-address"
-                           name="Email"
-                           type="email"
-                           autocomplete="email"
-                           required
+                    <input
+                           asp-for="UserName"                           
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                           placeholder="Введите погин" />
+                           placeholder="Введите логин" />
+                    <span asp-validation-for="UserName"></span>
                 </div>
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="Password" class="block text-sm font-medium text-gray-700">
                         Пароль
                     </label>
-                    <input id="password"
-                           name="Password"
+                    <input
+                           asp-for="Password"
                            type="password"
-                           autocomplete="current-password"
-                           required
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Пароль" />
+                    <span asp-validation-for="Password"></span>
                 </div>
-            </div>
-            <div class="flex items-center justify-between">
-                <div class="text-sm">
-                    <a asp-controller="Auth" asp-action="ForgotPassword" class="font-medium text-indigo-600 hover:text-indigo-500">
-                        Забыли пароль?
-                    </a>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input
+                               asp-for="RememberMe"
+                               type="checkbox"
+                               class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded transition duration-300">
+                        <label asp-for="RememberMe" class="ml-2 text-sm font-medium text-gray-700 hover:text-indigo-600 transition duration-300">
+                            Запомнить меня
+                        </label>
+                        <span asp-validation-for="RememberMe"></span>
+                    </div>
+                    <div>
+                        <a asp-controller="Auth" asp-action="ForgotPassword" class="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition duration-300">
+                            Забыли пароль?
+                        </a>
+                    </div>
                 </div>
             </div>
             <div>
