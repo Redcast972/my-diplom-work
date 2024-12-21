@@ -72,6 +72,7 @@ app.UseRouting();
 app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapFallbackToController("NotFound", "Error");
 
 app.UseEndpoints(endpoints =>
 {

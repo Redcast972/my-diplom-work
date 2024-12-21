@@ -4,24 +4,30 @@ namespace AllCourses.Models
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Вы не выбрали роль.")]
-        [Display(Name = "Роль")]
+        [Required(ErrorMessage = "Поле тип пользователя обязательно для заполнения.")]
+        [Display(Name = "Тип пользователя")]
         public string Role { get; set; }
 
-        [Required(ErrorMessage = "Поле логина не должно быть пустым.")]
-        [Display(Name = "Логин")]
+        [Required(ErrorMessage = "Поле Имя пользователя обязательно для заполнения.")]
+        [StringLength(255, ErrorMessage = "Имя пользователя должно быть длиной от 3 до 255 символов.", MinimumLength = 3)]
+        [Display(Name = "Имя пользователя")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Поле почты не должно быть пустым.")]
-        [UIHint("email")]
-        [Display(Name = "Почта")]
+        [Required(ErrorMessage = "Поле электронная почта обязательно для заполнения.")]
+        [EmailAddress(ErrorMessage = "Некорректный формат электронной почты.")]
+        [Display(Name = "Электронная почта")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Поле пароля не должно быть пустым.")]
-        [UIHint("password")]
+        [Required(ErrorMessage = "Поле пароль обязательно для заполнения.")]
+        [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "Пароль должно быть длиной от 6 и более символов.", MinimumLength = 6)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Поле подтверждение пароля обязательно для заполнения.")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают.")]
+        [Display(Name = "Подтверждение пароля")]
         public string ConfirmPassword { get; set; }
     }
 }

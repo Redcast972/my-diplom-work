@@ -21,7 +21,7 @@
                            asp-for="UserName"                           
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Введите логин" />
-                    <span asp-validation-for="UserName"></span>
+                    <span class="text-red-600" asp-validation-for="UserName"></span>
                 </div>
                 <div>
                     <label asp-for="Password" class="block text-sm font-medium text-gray-700">
@@ -32,7 +32,7 @@
                            type="password"
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Пароль" />
-                    <span asp-validation-for="Password"></span>
+                    <span class="text-red-600" asp-validation-for="Password"></span>
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">

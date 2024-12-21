@@ -22,42 +22,47 @@
                         <option value="Student">Студент</option>
                         <option value="Teacher">Преподаватель</option>
                     </select>
+                    <span class="text-red-600" asp-validation-for="Role"></span>
                 </div>
 
                 <div>
                     <label asp-for="UserName" class="block text-sm font-medium text-gray-700">
                         Логин
                     </label>
-                    <input asp-for="UserName" type="text" required
+                    <input asp-for="UserName" type="text" 
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Логин" />
+                    <span class="text-red-600" asp-validation-for="UserName"></span>
                 </div>
 
                 <div>
                     <label asp-for="Email" class="block text-sm font-medium text-gray-700">
                         Электронная почта
                     </label>
-                    <input asp-for="Email" type="email" required
+                    <input asp-for="Email" type="email" 
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Электронная почта" />
+                    <span class="text-red-600" asp-validation-for="Email"></span>
                 </div>
 
                 <div>
                     <label asp-for="Password" class="block text-sm font-medium text-gray-700">
                         Пароль
                     </label>
-                    <input asp-for="Password" type="password" required
+                    <input asp-for="Password" type="password" 
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Пароль" />
+                    <span class="text-red-600" asp-validation-for="Password"></span>
                 </div>
 
                 <div>
-                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">
-                        Подтверждение пароля
+                    <label asp-for="ConfirmPassword" class="block text-sm font-medium text-gray-700">
+                        Подтвердите пароль
                     </label>
-                    <input id="confirm-password" name="ConfirmPassword" type="password" required
+                    <input asp-for="ConfirmPassword" type="password" 
                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="Подтвердите пароль" />
+                    <span class="text-red-600" asp-validation-for="ConfirmPassword"></span>
                 </div>
             </div>
 

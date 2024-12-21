@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace AllCourses.Controllers
 {
@@ -9,11 +10,13 @@ namespace AllCourses.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr)
+        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr, RoleManager<IdentityRole> roleMgr)
         {
             userManager = userMgr;
             signInManager = signInMgr;
+            roleManager = roleMgr;
         }
 
         [AllowAnonymous]
@@ -24,9 +27,9 @@ namespace AllCourses.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid || returnUrl == null)
+            if (ModelState.IsValid)
             {
                 IdentityUser user = await userManager.FindByNameAsync(model.UserName);
                 if (user != null)
@@ -35,7 +38,7 @@ namespace AllCourses.Controllers
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
-                        return Redirect(returnUrl ?? "/");
+                        return Redirect("/");
                     }
                     ModelState.AddModelError(nameof(LoginViewModel.UserName), "Неправильный логин или пароль");
                 }
@@ -46,6 +49,51 @@ namespace AllCourses.Controllers
         public IActionResult Register()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Создаем пользователя
+                //var user = new ApplicationUser
+                //{
+                //    UserName = model.UserName,
+                //    Email = model.Email,
+                //    Role = model.Role
+                //};
+                var hasher = new PasswordHasher<IdentityUser>();
+                var user = new IdentityUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = model.UserName,
+                    NormalizedUserName = model.UserName.ToUpper(),
+                    Email = model.Email,
+                    NormalizedEmail = model.Email.ToUpper(),
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, model.Password),
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+
+                var result = await userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    // Назначаем роль пользователю
+                    await userManager.AddToRoleAsync(user, model.Role);
+
+                    // Перенаправляем на страницу логина после успешной регистрации
+                    return RedirectToAction("Login", "Account");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
         }
 
         public IActionResult Accessdenied()
@@ -61,7 +109,7 @@ namespace AllCourses.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
     }
 }
