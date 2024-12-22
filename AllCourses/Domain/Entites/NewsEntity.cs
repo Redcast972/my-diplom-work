@@ -4,19 +4,25 @@ namespace AllCourses.Domain.Entites
 {
     public class NewsEntity
     {
-        [Required]
+        [Key]
         public Guid Id { get; set; }
 
-        [Display(Name = "Название")]
+        [Required]
+        [MaxLength(200)]
         public string Title { get; set; }
 
-        [Display(Name = "Описание")]
+        [Required]
+        [MaxLength(500)]
         public string Description { get; set; }
 
-        [Display(Name = "Изображение")]
-        public ImageEntity Image { get; set; }
+        [Required]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        [Display(Name = "Дата создания")]
-        public DateTime Date { get; set; }
+        // Картинка в виде массива байтов
+        public byte[] ImageData { get; set; }
+
+        // MIME-тип картинки (например, image/png)
+        [MaxLength(50)]
+        public string ImageContentType { get; set; }
     }
 }

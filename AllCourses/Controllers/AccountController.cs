@@ -56,13 +56,6 @@ namespace AllCourses.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Создаем пользователя
-                //var user = new ApplicationUser
-                //{
-                //    UserName = model.UserName,
-                //    Email = model.Email,
-                //    Role = model.Role
-                //};
                 var hasher = new PasswordHasher<IdentityUser>();
                 var user = new IdentityUser
                 {
@@ -73,7 +66,8 @@ namespace AllCourses.Controllers
                     NormalizedEmail = model.Email.ToUpper(),
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, model.Password),
-                    SecurityStamp = Guid.NewGuid().ToString()
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    
                 };
 
                 var result = await userManager.CreateAsync(user, model.Password);
@@ -81,7 +75,7 @@ namespace AllCourses.Controllers
                 if (result.Succeeded)
                 {
                     // Назначаем роль пользователю
-                    await userManager.AddToRoleAsync(user, model.Role);
+                    await userManager.AddToRoleAsync(user, "user");
 
                     // Перенаправляем на страницу логина после успешной регистрации
                     return RedirectToAction("Login", "Account");

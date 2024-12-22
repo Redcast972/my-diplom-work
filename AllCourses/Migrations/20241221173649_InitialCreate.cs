@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,19 +54,6 @@ namespace AllCourses.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    FileName = table.Column<string>(type: "text", nullable: false),
-                    Data = table.Column<byte[]>(type: "bytea", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Images", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Messages",
                 columns: table => new
                 {
@@ -78,6 +65,22 @@ namespace AllCourses.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Messages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: false),
+                    ImageContentType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,27 +189,6 @@ namespace AllCourses.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "News",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    ImageId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_News", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_News_Images_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "Images",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -214,8 +196,7 @@ namespace AllCourses.Migrations
                 {
                     { "1", null, "admin", "ADMIN" },
                     { "2", null, "moderator", "MODERATOR" },
-                    { "3", null, "teacher", "TEACHER" },
-                    { "4", null, "student", "STUDENT" }
+                    { "3", null, "user", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -223,8 +204,8 @@ namespace AllCourses.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "ef8c8dbb-e839-45c3-a7fe-d565dd36444d", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEHZUOXMLv/lj6BQ1mUnaynERpuGYO7tYXqDnyN+AYBBL9swWMTuWWIpEivRdHVVG6w==", null, false, "f4ed6fd6-8430-4a69-88b9-a924140bda05", false, "admin" },
-                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "2fc6b2bd-439e-4db8-80c6-4874f35bf85c", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEKMQcVPd8K4P7FRtHw3jhi1RyjKsK57FtdCd6+J20oLukTHiUdNGBjUi5gDD3X7A2g==", null, false, "22257a60-1f9d-413b-9e80-b317b997ea30", false, "moderator" }
+                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "1d5096ab-441c-4578-93a5-fab2b6d94bda", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEDpvwCWY6nwKPuAkBr35TIrqxVysdpu1V+3cL4zY4kPlXO4G4Lay6UXovBS9CADARQ==", null, false, "4f4a3437-cd5d-48c8-b052-42de5de2cad2", false, "admin" },
+                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "29cc7a80-3dff-4d79-b538-8a9b17b031fb", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEFooek+ztt5J4L+Aumn4SH+YYRZ5o+4koY2UIXMwlch4KcntVrbVhDyBro5L/l15BA==", null, false, "309408bb-3bbe-4fb1-ac14-46f4c0476494", false, "moderator" }
                 });
 
             migrationBuilder.InsertData(
@@ -272,11 +253,6 @@ namespace AllCourses.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_News_ImageId",
-                table: "News",
-                column: "ImageId");
         }
 
         /// <inheritdoc />
@@ -308,9 +284,6 @@ namespace AllCourses.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Images");
         }
     }
 }

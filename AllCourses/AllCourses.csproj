@@ -20,11 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Student\" />
-    <Folder Include="Areas\Moderator\" />
-    <Folder Include="Areas\Teacher\" />
+    <Folder Include="Areas\Moderator\Controllers\" />
+    <Folder Include="Areas\Moderator\Views\" />
+    <Folder Include="Areas\Student\Controllers\" />
+    <Folder Include="Areas\Student\Views\" />
     <Folder Include="wwwroot\" />
-    <Folder Include="Domain\" />
   </ItemGroup>
 
 </Project>

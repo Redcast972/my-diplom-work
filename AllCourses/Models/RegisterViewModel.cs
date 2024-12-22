@@ -4,10 +4,6 @@ namespace AllCourses.Models
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Поле тип пользователя обязательно для заполнения.")]
-        [Display(Name = "Тип пользователя")]
-        public string Role { get; set; }
-
         [Required(ErrorMessage = "Поле Имя пользователя обязательно для заполнения.")]
         [StringLength(255, ErrorMessage = "Имя пользователя должно быть длиной от 3 до 255 символов.", MinimumLength = 3)]
         [Display(Name = "Имя пользователя")]

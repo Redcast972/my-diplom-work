@@ -12,7 +12,7 @@ namespace AllCourses.Domain
 
         public DbSet<NewsEntity> News { get; set; }
         public DbSet<MessageEntity> Messages { get; set; }
-        public DbSet<ImageEntity> Images { get; set; }
+        public DbSet<UserAvatarEntity> UserAvatars { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,7 +28,7 @@ namespace AllCourses.Domain
             return new List<IdentityRole>
             {
                 new IdentityRole { Id = "1", Name = "admin", NormalizedName = "ADMIN" },
-                new IdentityRole { Id = "2", Name = "moderator", NormalizedName = "MODERATOR" },
+                new IdentityRole { Id = "2", Name = "moderator", NormalizedName = "MODERATOR" },               
                 new IdentityRole { Id = "3", Name = "teacher", NormalizedName = "TEACHER" },
                 new IdentityRole { Id = "4", Name = "student", NormalizedName = "STUDENT" }
             };

@@ -13,19 +13,6 @@
         <form asp-controller="Account" asp-action="Register" method="post" class="mt-8 space-y-6">
             <div class="rounded-md shadow-sm space-y-4">
                 <div>
-                    <label asp-for="Role" class="block text-sm font-medium text-gray-700">
-                        Тип пользователя
-                    </label>
-                    <select asp-for="Role" name="Role"
-                            class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <option value="">Выберите тип пользователя</option>
-                        <option value="Student">Студент</option>
-                        <option value="Teacher">Преподаватель</option>
-                    </select>
-                    <span class="text-red-600" asp-validation-for="Role"></span>
-                </div>
-
-                <div>
                     <label asp-for="UserName" class="block text-sm font-medium text-gray-700">
                         Логин
                     </label>

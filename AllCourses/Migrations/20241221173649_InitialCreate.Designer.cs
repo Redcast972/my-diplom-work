@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     [DbContext(typeof(AllCoursesDbContext))]
-    [Migration("20241209181757_init")]
-    partial class init
+    [Migration("20241221173649_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,25 +24,6 @@ namespace AllCourses.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("AllCourses.Domain.Entites.ImageEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<byte[]>("Data")
-                        .IsRequired()
-                        .HasColumnType("bytea");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Images");
-                });
 
             modelBuilder.Entity("AllCourses.Domain.Entites.MessageEntity", b =>
                 {
@@ -71,23 +52,29 @@ namespace AllCourses.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
-                    b.Property<Guid>("ImageId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("ImageContentType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("News");
                 });
@@ -133,14 +120,8 @@ namespace AllCourses.Migrations
                         new
                         {
                             Id = "3",
-                            Name = "teacher",
-                            NormalizedName = "TEACHER"
-                        },
-                        new
-                        {
-                            Id = "4",
-                            Name = "student",
-                            NormalizedName = "STUDENT"
+                            Name = "user",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -237,15 +218,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "6c0eff69-b00a-49ba-b093-2e9e974828f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ef8c8dbb-e839-45c3-a7fe-d565dd36444d",
+                            ConcurrencyStamp = "1d5096ab-441c-4578-93a5-fab2b6d94bda",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHZUOXMLv/lj6BQ1mUnaynERpuGYO7tYXqDnyN+AYBBL9swWMTuWWIpEivRdHVVG6w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDpvwCWY6nwKPuAkBr35TIrqxVysdpu1V+3cL4zY4kPlXO4G4Lay6UXovBS9CADARQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f4ed6fd6-8430-4a69-88b9-a924140bda05",
+                            SecurityStamp = "4f4a3437-cd5d-48c8-b052-42de5de2cad2",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -253,15 +234,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "ef26d68c-2299-407b-a953-a8a63dda5f5c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2fc6b2bd-439e-4db8-80c6-4874f35bf85c",
+                            ConcurrencyStamp = "29cc7a80-3dff-4d79-b538-8a9b17b031fb",
                             Email = "moderator@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MODERATOR@GMAIL.COM",
                             NormalizedUserName = "MODERATOR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKMQcVPd8K4P7FRtHw3jhi1RyjKsK57FtdCd6+J20oLukTHiUdNGBjUi5gDD3X7A2g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFooek+ztt5J4L+Aumn4SH+YYRZ5o+4koY2UIXMwlch4KcntVrbVhDyBro5L/l15BA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "22257a60-1f9d-413b-9e80-b317b997ea30",
+                            SecurityStamp = "309408bb-3bbe-4fb1-ac14-46f4c0476494",
                             TwoFactorEnabled = false,
                             UserName = "moderator"
                         });
@@ -358,17 +339,6 @@ namespace AllCourses.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("AllCourses.Domain.Entites.NewsEntity", b =>
-                {
-                    b.HasOne("AllCourses.Domain.Entites.ImageEntity", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
