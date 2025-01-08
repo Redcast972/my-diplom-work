@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using AllCourses.Domain.Repositories.Abstract
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,10 +12,10 @@
 <body>
     <style>
         .bgimage {
-            width: 125px;
-            height: 125px;
-            background-image: url('../images/image.png');
-            background-size: contain;
+        width: 125px;
+        height: 125px;
+        background-image: url('../images/image.png');
+        background-size: contain;
         }
     </style>
     <header class="bg-slate-50">
@@ -30,6 +33,7 @@
                         // Отображаем изображение профиля и логин и email
                         <div class="flex items-center space-x-3 cursor-pointer group relative">
                             <!-- Иконка профиля -->
+                            
                             <img src="/images/profile-icon.jpg" alt="Icon" class="w-10 h-10 rounded-full" />
 
                             <!-- Информация о пользователе -->

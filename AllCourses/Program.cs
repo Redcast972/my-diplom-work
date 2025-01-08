@@ -23,6 +23,7 @@ builder.Services.AddControllersWithViews(options =>
 //Получаем нужный функционал приложения в качестве сервисов
 builder.Services.AddTransient<IMessageRepository, EFMessageRepository>();
 builder.Services.AddTransient<INewsRepository, EFNewsRepository>();
+builder.Services.AddTransient<IUserAvatarsRepository, EFUserAvatarsRepository>();
 
 //настраивем Identity систему
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(ops =>

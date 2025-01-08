@@ -1,4 +1,5 @@
-﻿using AllCourses.Models;
+﻿using AllCourses.Domain.Repositories.Abstract;
+using AllCourses.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,14 @@ namespace AllCourses.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IUserAvatarsRepository userAvatarsRepository;
 
-        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr, RoleManager<IdentityRole> roleMgr)
+        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr, RoleManager<IdentityRole> roleMgr, IUserAvatarsRepository usrAvatarsRepository)
         {
             userManager = userMgr;
             signInManager = signInMgr;
             roleManager = roleMgr;
+            userAvatarsRepository = usrAvatarsRepository;
         }
 
         [AllowAnonymous]
@@ -70,12 +73,14 @@ namespace AllCourses.Controllers
                     
                 };
 
+                userAvatarsRepository.SaveDefaultAvatarAsync("png", Guid.Parse(user.Id));
+                
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     // Назначаем роль пользователю
-                    await userManager.AddToRoleAsync(user, "user");
+                    await userManager.AddToRoleAsync(user, "student");
 
                     // Перенаправляем на страницу логина после успешной регистрации
                     return RedirectToAction("Login", "Account");

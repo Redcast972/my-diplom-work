@@ -12,7 +12,7 @@ namespace AllCourses.Domain
 
         public DbSet<NewsEntity> News { get; set; }
         public DbSet<MessageEntity> Messages { get; set; }
-        public DbSet<UserAvatarEntity> UserAvatars { get; set; }
+        public DbSet<UserAvatarEntity> UsersAvatars { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
