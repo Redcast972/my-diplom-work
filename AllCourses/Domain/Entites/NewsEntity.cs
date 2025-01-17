@@ -7,8 +7,8 @@ namespace AllCourses.Domain.Entites
         [Key]
         public Guid Id { get; set; }
 
-        [Required]
-        [MaxLength(200)]
+        [Required(ErrorMessage = "Заголовок не должен быть пустым")]
+        [MaxLength(100)]
         public string Title { get; set; }
 
         [Required]

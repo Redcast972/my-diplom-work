@@ -1,33 +1,57 @@
 ﻿using AllCourses.Domain.Entites;
 using AllCourses.Domain.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace AllCourses.Domain.Repositories.EntityFramevork
 {
     public class EFNewsRepository : INewsRepository
     {
-        public Task CreateNewsAsync(NewsEntity news)
+        private AllCoursesDbContext _context;
+
+        public EFNewsRepository(AllCoursesDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;    
+        }
+        public async Task CreateNewsAsync(NewsEntity news)
+        {
+            if (news == null)
+            {
+                throw new ArgumentNullException(nameof(news));
+            }
+
+            await _context.News.AddAsync(news);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteNewsAsync(Guid id)
+        public async Task DeleteNewsAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var news = await GetNewsByIdAsync(id);
+            if (news == null)
+            {
+                throw new KeyNotFoundException("News not found");
+            }
+
+            _context.News.Remove(news);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<NewsEntity>> GetAllNewsAsync()
+        public async Task<IEnumerable<NewsEntity>> GetAllNewsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.News.ToListAsync();
         }
 
-        public Task<NewsEntity> GetNewsByIdAsync(Guid id)
+        public async Task<NewsEntity> GetNewsByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.News.FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public Task UpdateNewsAsync(NewsEntity news)
+        public async Task UpdateNewsAsync(NewsEntity news)
         {
-            throw new NotImplementedException();
+            if (news == null)
+                throw new ArgumentNullException(nameof(news));
+
+            _context.News.Update(news);
+            await _context.SaveChangesAsync();
         }
     }
 }
