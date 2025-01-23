@@ -21,8 +21,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\Moderator\Controllers\" />
+    <Folder Include="Areas\Moderator\Models\" />
     <Folder Include="Areas\Moderator\Views\" />
     <Folder Include="Areas\Student\Controllers\" />
+    <Folder Include="Areas\Student\Models\" />
     <Folder Include="Areas\Student\Views\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

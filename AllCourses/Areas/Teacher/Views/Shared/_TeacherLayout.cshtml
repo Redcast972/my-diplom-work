@@ -1,0 +1,126 @@
+﻿@using AllCourses.Domain.Repositories.Abstract
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AllCourses</title>
+    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
+</head>
+<body>
+    <style>
+        .bgimage {
+            width: 125px;
+            height: 125px;
+            background-image: url('/images/image.png');
+            background-size: contain;
+        }
+    </style>
+    <header class="bg-slate-50">
+        <nav class="py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <div class="text-2xl font-extrabold text-indigo-600">AllCourses</div>
+                <div class="space-x-4 flex items-center">
+                    <select class="bg-slate-50">
+                        <option value="en">RU</option>
+                        <option value="ru">KZ</option>
+                        <option value="fr">EN</option>
+                    </select>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                    // Отображаем изображение профиля и логин и email
+                        <div class="flex items-center space-x-3 cursor-pointer group relative">
+                            <!-- Иконка профиля -->
+
+                            <img src="/images/defaultProfileIcon.png" alt="Icon" class="w-10 h-10 rounded-full" />
+
+                            <!-- Информация о пользователе -->
+                            <div class="flex flex-col items-start text-sm">
+                                <span class="font-medium text-gray-800">@User.Identity.Name</span>
+                                <span class="text-gray-500 text-xs"></span>
+                            </div>
+
+                            <!-- Выпадающее меню -->
+                            <div class="absolute top-12 right-0 bg-white shadow-md rounded-md hidden group-hover:block z-10">
+                                <ul class="py-2 text-sm text-gray-700">
+                                    <li>
+                                        <a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Профиль</a>
+                                    </li>
+                                    <li>
+                                        <a href="/settings" class="block px-4 py-2 hover:bg-gray-100">Настройки</a>
+                                    </li>
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post">
+                                            <button type="submit" class="w-full text-left block px-4 py-2 hover:bg-gray-100">Выход</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                // Отображаем кнопку "Войти"
+                        <a asp-controller="Account" asp-action="Login" class="px-4 py-2 text-indigo-600 bg-white hover:bg-indigo-100 rounded-md shadow-md text-sm font-medium border border-indigo-600 transition-all duration-300">Войти</a>
+                    }
+
+                </div>
+            </div>
+        </nav>
+        <div class="py-2">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <ul class="flex space-x-10">
+                    <li><a href="/" class="text-gray-700 hover:text-indigo-600 font-medium">Главная</a></li>
+                    <li><a href="/courses" class="text-gray-700 hover:text-indigo-600 font-medium">Курсы</a></li>
+                    <li><a href="/forum" class="text-gray-700 hover:text-indigo-600 font-medium">Форум</a></li>
+                    <li><a href="/news" class="text-gray-700 hover:text-indigo-600 font-medium">Новости</a></li>
+                    <li><a href="/statistics" class="text-gray-700 hover:text-indigo-600 font-medium">Статистика</a></li>
+                    <li><a href="/home/about" class="text-gray-700 hover:text-indigo-600 font-medium">О нас</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="bg-slate-50">
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="shadow-md py-4 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-between items-start">
+            <div class="text-left text-gray-800 mb-6 md:mb-0">
+                <p class="text-2xl font-extrabold text-indigo-600 mb-4">AllCourses</p>
+                <p class="font-bold">ОБРАЗОВАТЕЛЬНАЯ ПЛАТФОРМА</p>
+                <p class="mt-4">
+                    <a href="#" class="text-indigo-500">Пользовательское соглашение</a>
+                </p>
+                <p>
+                    <a href="#" class="text-indigo-500">Политика конфиденциальности</a>
+                </p>
+                <p class="mt-6 text-gray-500">Разработка системы TOO "KpCompany"</p>
+            </div>
+
+
+            <div class="bg-white rounded-lg shadow-lg p-4 w-40">
+                <div class='flex items-center justify-center'>
+                    <div class="bgimage"></div>
+                </div>
+                <p class="text-blue-500 font-medium block text-center">
+                    Разработчик системы
+                </p>
+                <span class="text-sm text-blue-700 font-bold flex items-center justify-center">
+                    <a href="https://t.me/Perepelitsa_Kirill">@@Perepelitsa_Kirill</a>
+
+                </span>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left text-gray-500 mt-6">
+            <p>2025 &copy; AllCourses</p>
+        </div>
+    </footer>
+
+</body>
+</html>
