@@ -1,0 +1,39 @@
+﻿@using AllCourses.Areas.Admin.Models
+@model NewsViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="absolute inset-0 bg-slate-50 z-0"></div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mt-6 relative">
+    
+
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="relative">
+            @if (Model.ImageData != null)
+            {
+                <img src="data:image/png;base64,@Convert.ToBase64String(Model.ImageData)" alt="Новость" class="rounded-lg shadow-md w-full h-96 object-cover" />
+            }
+            else
+            {
+                <p class="text-gray-500 mt-2">Нет изображения</p>
+            }
+        </div>
+        
+        <h2 class="text-3xl font-bold text-gray-600 mb-6">@Model.Title</h2>
+
+        <div class="mt-4">
+            <p class="text-gray-600 mt-4">@Model.Discription</p>
+            <p class="text-sm text-gray-500">Дата публикации: @Model.CreatedAt.ToString("dd.MM.yyyy")</p>
+        </div>
+
+        <!-- Кнопка для возврата или перехода -->
+        <div class="mt-6">
+            <a href="@Url.Action("Index", "News", new { area = "Admin" })" class="text-indigo-600 hover:text-indigo-800 font-semibold">
+                Вернуться к списку новостей
+            </a>
+        </div>
+    </div>
+</div>

@@ -15,10 +15,10 @@ namespace AllCourses.Areas.Teacher.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddCourse(CreateCourseViewModel model)
-        {
+        //[HttpPost]
+        //public async Task<IActionResult> AddCourse(CreateCourseViewModel model)
+        //{
         
-        }
+        //}
     }
 }

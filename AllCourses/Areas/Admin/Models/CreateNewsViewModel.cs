@@ -2,18 +2,15 @@
 
 namespace AllCourses.Areas.Admin.Models
 {
-    public class NewsViewModel
+    public class CreateNewsViewModel
     {
-        public Guid Id { get; set; }
-
         [Required(ErrorMessage = "Поле заголовка не должно быть пустым.")]
         [Display(Name = "Загаловок")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Поле контента не должно быть пустым.")]
+        [Required(ErrorMessage = "Поле контента не должно быть пустым.")]       
         [Display(Name = "Контент")]
         public string Discription { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public byte[] ImageData { get; set; }
+        public IFormFile ImageFile { get; set; }
     }
 }

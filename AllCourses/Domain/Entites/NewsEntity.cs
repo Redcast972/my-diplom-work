@@ -11,7 +11,7 @@ namespace AllCourses.Domain.Entites
         [MaxLength(100)]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Описание не должен быть пустым")]
         [MaxLength(500)]
         public string Description { get; set; }
 
