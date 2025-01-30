@@ -7,9 +7,17 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <h1 class="text-3xl font-bold text-indigo-600 mb-6">Список новостей</h1>
+    <!-- Верхний блок с заголовком и кнопкой -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-indigo-600">Список новостей</h1>
+        <a href="@Url.Action("AddNews", "News", new { area = "Admin" })" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
+            Добавить новость
+        </a>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Сетка карточек новостей -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Две карточки в ряд начиная с sm -->
         @foreach (var news in Model)
         {
             <a href="@Url.Action("Details", "News", new { id = news.Id })" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
