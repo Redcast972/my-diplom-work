@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Models
+namespace AllCourses.Models.Register
 {
     public class RegisterViewModel
     {

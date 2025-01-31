@@ -1,7 +1,7 @@
-﻿@using AllCourses.Areas.Admin.Models
+﻿@using AllCourses.Models.News
 @model NewsViewModel
 @{
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "_Layout";
     ViewData["Title"] = Model.Title;
 }
 
@@ -29,7 +29,7 @@
 
         <!-- Кнопка для возврата или перехода -->
         <div class="mt-6">
-            <a href="@Url.Action("Index", "News", new { area = "Admin" })" class="text-indigo-600 hover:text-indigo-800 font-semibold">
+            <a href="/news" class="text-indigo-600 hover:text-indigo-800 font-semibold">
                 Вернуться к списку новостей
             </a>
         </div>

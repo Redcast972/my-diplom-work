@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Areas.Admin.Models
+namespace AllCourses.Models.News
 {
     public class NewsViewModel
     {

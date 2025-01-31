@@ -1,5 +1,6 @@
 ﻿using AllCourses.Domain.Repositories.Abstract;
-using AllCourses.Models;
+using AllCourses.Models.Login;
+using AllCourses.Models.Register;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -70,11 +71,11 @@ namespace AllCourses.Controllers
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, model.Password),
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    
+
                 };
 
                 userAvatarsRepository.SaveDefaultAvatarAsync("png", Guid.Parse(user.Id));
-                
+
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
