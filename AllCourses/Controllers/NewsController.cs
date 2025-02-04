@@ -56,10 +56,26 @@ namespace AllCourses.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> AddNews(CreateNewsViewModel model)
         {
+            // Проверка, что файл выбран
+            if (model.ImageFile == null || model.ImageFile.Length == 0)
+            {
+                ModelState.AddModelError("ImageFile", "Вы не выбрали изображение.");
+                return View(model);
+            }
+
+            // Проверка размера файла (например, 5 MB)
+            if (model.ImageFile.Length > 5 * 1024 * 1024)
+            {
+                ModelState.AddModelError("ImageFile", "Размер файла не должен превышать 5 MB.");
+                return View(model);
+            }
+
+            // Копирование файла в память
             using var memoryStream = new MemoryStream();
             await model.ImageFile.CopyToAsync(memoryStream);
             var imageBytes = memoryStream.ToArray();
 
+            // Создание сущности новости
             var newsEntity = new NewsEntity
             {
                 Id = Guid.NewGuid(),
@@ -70,6 +86,7 @@ namespace AllCourses.Controllers
                 ImageContentType = model.ImageFile.ContentType
             };
 
+            // Создание новости в базе данных
             await _newsRepository.CreateNewsAsync(newsEntity);
 
             return RedirectToAction("Index");

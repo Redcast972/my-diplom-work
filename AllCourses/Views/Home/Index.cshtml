@@ -1,4 +1,6 @@
-﻿@{
+﻿@using AllCourses.Models.News
+@model List<NewsViewModel>
+@{
     Layout = "_Layout"; // Set your layout file here
     ViewData["Title"] = "Главная";
 }
@@ -104,20 +106,26 @@
                 Последние новости
             </h2>
 
-            <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                @for (int i = 1; i <= 3; i++)
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <!-- Две карточки в ряд начиная с sm -->
+                @foreach (var news in Model)
                 {
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow">
-                        <h3 class="text-xl font-bold text-gray-900">Заголовок новости @i</h3>
-                        <p class="mt-2 text-gray-600">
-                            Краткое введение к статье блога. Узнайте последние инсайты и обновления.
-                        </p>
-                        <div class="mt-4">
-                            <a href="/blog/post-@i" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                                Читать далее &rarr;
-                            </a>
+                    <a href="@Url.Action("Details", "News", new { id = news.Id })" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                        <div class="relative">
+                            @if (news.ImageData != null)
+                            {
+                                <img src="data:image/png;base64,@Convert.ToBase64String(news.ImageData)" alt="Новость" class="rounded-lg shadow-md w-20 h-48 object-cover" />
+                            }
+                            else
+                            {
+                                <p class="text-gray-500 mt-2">Нет изображения</p>
+                            }
                         </div>
-                    </div>
+                        <div class="mt-4">
+                            <h2 class="text-xl font-semibold text-gray-800 truncate">@news.Title</h2>
+                            <p class="text-sm text-gray-500 mt-2">@news.CreatedAt.ToString("dd.MM.yyyy")</p>
+                        </div>
+                    </a>
                 }
             </div>
         </div>

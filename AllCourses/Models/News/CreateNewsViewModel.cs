@@ -11,6 +11,8 @@ namespace AllCourses.Models.News
         [Required(ErrorMessage = "Поле контента не должно быть пустым.")]
         [Display(Name = "Контент")]
         public string Discription { get; set; }
+
+        [Required(ErrorMessage = "Вы не выбрали изображение.")]
         public IFormFile ImageFile { get; set; }
     }
 }
