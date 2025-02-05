@@ -1,4 +1,5 @@
 ﻿using AllCourses.Domain.Entites;
+using AllCourses.Domain.Entites.Courses;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,8 @@ namespace AllCourses.Domain
         public DbSet<NewsEntity> News { get; set; }
         public DbSet<MessageEntity> Messages { get; set; }
         public DbSet<UserAvatarEntity> UsersAvatars { get; set; }
+        public DbSet<CourseCategoryTypeEntity> CourseCategoryTypes { get; set; }
+        public DbSet<CoursePriceTypeEntity> CoursePriceTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,0 +1,27 @@
+﻿@using AllCourses.Models.Courses
+@model GetAccessToCreateCoursesViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Заявка на получение доступа к созданию курсов";
+}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-3xl font-bold text-indigo-600 mb-6">Заявка на получение доступа к созданию курсов</h1>
+    <form action="/courses/get-access-to-create-courses" method="post" enctype="multipart/form-data" class="space-y-6 bg-white p-8 rounded-lg shadow-md">
+        <div>
+
+            <label asp-for="Discription" class="block text-xl font-medium text-gray-700">Почему и с какой целью хотите создавать курсы?</label>
+            <textarea asp-for="Discription" rows="6" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+            <span class="text-red-600" asp-validation-for="Discription"></span>
+        </div>
+
+        <div class="flex justify-between">
+            <a href="/courses" class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md">
+                Отменить
+            </a>
+            <button type="submit" class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md">
+                Отправить
+            </button>
+        </div>
+    </form>
+</div>

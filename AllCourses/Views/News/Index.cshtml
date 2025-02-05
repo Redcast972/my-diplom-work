@@ -2,12 +2,12 @@
 @model List<NewsViewModel>
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Список новостей";
+    ViewData["Title"] = "Новости";
 }
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <!-- Верхний блок с заголовком и кнопкой -->
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-indigo-600">Список новостей</h1>
+        <h1 class="text-3xl font-bold text-indigo-600">Новости</h1>
         @if (User.IsInRole("admin"))
         {
             <a href="/news/addnews" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
