@@ -18,6 +18,6 @@ namespace AllCourses.Domain.Entites.ApplicationsForTeaching
         public string UserEmail { get; set; }
 
         [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
     }
 }

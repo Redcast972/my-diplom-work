@@ -24,6 +24,8 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddTransient<IMessageRepository, EFMessageRepository>();
 builder.Services.AddTransient<INewsRepository, EFNewsRepository>();
 builder.Services.AddTransient<IUserAvatarsRepository, EFUserAvatarsRepository>();
+builder.Services.AddTransient<IApplicationsForTeachingRepository, EFApplicationsForTeachingRepository>();
+builder.Services.AddTransient<ICoursePriceTypesRepository, EFCoursePriceTypesRepository>();
 
 //настраивем Identity систему
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(ops =>
