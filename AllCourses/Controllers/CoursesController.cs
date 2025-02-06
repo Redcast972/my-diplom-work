@@ -24,6 +24,7 @@ namespace AllCourses.Controllers
         }
 
         [Authorize(Roles = "student")]
+        [Route("[controller]/get-access-to-create-courses")]
         public IActionResult GetAccessToCreateCourses()
         {
             return View();
@@ -31,9 +32,10 @@ namespace AllCourses.Controllers
 
         [HttpPost]
         [Route("[controller]/get-access-to-create-courses")]
+        [Authorize(Roles = "student")]
         public async Task<IActionResult> GetAccessToCreateCourses(GetAccessToCreateCoursesViewModel model)
         {
-            
+                            
         }
     }
 }
