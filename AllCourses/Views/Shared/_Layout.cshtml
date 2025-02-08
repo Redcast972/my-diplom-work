@@ -12,10 +12,10 @@
 <body>
     <style>
         .bgimage {
-            width: 125px;
-            height: 125px;
-            background-image: url('../images/image.png');
-            background-size: contain;
+        width: 125px;
+        height: 125px;
+        background-image: url('../images/image.png');
+        background-size: contain;
         }
     </style>
     <header class="bg-slate-50">
@@ -30,10 +30,10 @@
                     </select>
                     @if (User.Identity?.IsAuthenticated == true)
                     {
-                        // Отображаем изображение профиля и логин и email
+                    // Отображаем изображение профиля и логин и email
                         <div class="flex items-center space-x-3 cursor-pointer group relative">
                             <!-- Иконка профиля -->
-                            
+
                             <img src="/images/defaultProfileIcon.png" alt="Icon" class="w-10 h-10 rounded-full" />
 
                             <!-- Информация о пользователе -->
@@ -65,7 +65,7 @@
                         // Отображаем кнопку "Войти"
                         <a asp-controller="Account" asp-action="Login" class="px-4 py-2 text-indigo-600 bg-white hover:bg-indigo-100 rounded-md shadow-md text-sm font-medium border border-indigo-600 transition-all duration-300">Войти</a>
                     }
-                    
+
                 </div>
             </div>
         </nav>
@@ -78,6 +78,10 @@
                     <li><a href="/news" class="text-gray-700 hover:text-indigo-600 font-medium">Новости</a></li>
                     <li><a href="/statistics" class="text-gray-700 hover:text-indigo-600 font-medium">Статистика</a></li>
                     <li><a href="/home/about" class="text-gray-700 hover:text-indigo-600 font-medium">О нас</a></li>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li><a href="/courses/applications-to-teaching-list" class="text-gray-700 hover:text-indigo-600 font-medium">Заявки на преподавние</a></li>
+                    }
                 </ul>
             </div>
         </div>

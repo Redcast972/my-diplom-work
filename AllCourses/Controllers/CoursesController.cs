@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace AllCourses.Controllers
 {
@@ -80,6 +81,22 @@ namespace AllCourses.Controllers
             
             await _applicationsForTeachingRepository.CreateApplicationForTeachingAsync(application);
             return RedirectToAction("AwaitingApproval");
+        }
+
+        [Authorize(Roles = "admin")]
+        [Route("[controller]/applications-to-teaching-list")]
+        public IActionResult ApplicationsToTeachingList()
+        {
+            var applicationsToTeachingList = _applicationsForTeachingRepository.GetAllApplicationsForTeachingAsync();
+
+            return View(applicationsToTeachingList);
+        }
+
+        [Authorize(Roles = "admin")]
+        [Route("[controller]/applications-to-teaching/{id}")]
+        public IActionResult ApplicationsToTeaching(Guid id)
+        {
+            return View();
         }
     }
 }
