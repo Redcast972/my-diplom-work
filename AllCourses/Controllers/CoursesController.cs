@@ -1,17 +1,21 @@
-﻿using AllCourses.Domain.Repositories.Abstract;
+﻿using AllCourses.Domain.Entites.ApplicationsForTeaching;
+using AllCourses.Domain.Repositories.Abstract;
 using AllCourses.Models.Courses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AllCourses.Controllers
 {
     public class CoursesController : Controller
     {
+        private readonly UserManager<IdentityUser> userManager;
         public IApplicationsForTeachingRepository _applicationsForTeachingRepository;
-        public CoursesController(IApplicationsForTeachingRepository applicationsForTeachingRepository)  
+        public CoursesController(IApplicationsForTeachingRepository applicationsForTeachingRepository, UserManager<IdentityUser> userMgr)  
         {
-            _applicationsForTeachingRepository = applicationsForTeachingRepository;    
+            _applicationsForTeachingRepository = applicationsForTeachingRepository; 
+            userManager = userMgr;
         }
 
         public IActionResult Index()
@@ -32,7 +36,28 @@ namespace AllCourses.Controllers
 
         [Authorize(Roles = "student")]
         [Route("[controller]/get-access-to-create-courses")]
-        public IActionResult GetAccessToCreateCourses()
+        public async Task<IActionResult> GetAccessToCreateCoursesAsync()
+        {
+            var user = await userManager.GetUserAsync(User);
+            var application = _applicationsForTeachingRepository.GetApplicationForTeachingByUserNameAsync(user.UserName);
+
+            if (application != null)
+            {
+                return RedirectToAction("CreateApplicationAccessDenied");
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "student")]
+        [Route("[controller]/awaiting-approval")]
+        public IActionResult AwaitingApproval()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "student")]
+        [Route("[controller]/create-application-access-denied")]
+        public IActionResult CreateApplicationAccessDenied()
         {
             return View();
         }
@@ -42,7 +67,19 @@ namespace AllCourses.Controllers
         [Authorize(Roles = "student")]
         public async Task<IActionResult> GetAccessToCreateCourses(GetAccessToCreateCoursesViewModel model)
         {
-                           
+            var user = await userManager.GetUserAsync(User);
+
+            var application = new ApplicationForTeachingEntity
+            {
+                Id = Guid.NewGuid(),
+                Description = model.Discription,
+                UserName = user.UserName,
+                UserEmail= user.Email,
+                CreatedAt = DateTime.UtcNow,
+            };
+            
+            await _applicationsForTeachingRepository.CreateApplicationForTeachingAsync(application);
+            return RedirectToAction("AwaitingApproval");
         }
     }
 }

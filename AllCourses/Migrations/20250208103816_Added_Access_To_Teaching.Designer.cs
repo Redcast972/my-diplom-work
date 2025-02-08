@@ -3,6 +3,7 @@ using System;
 using AllCourses.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     [DbContext(typeof(AllCoursesDbContext))]
-    partial class AllCoursesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250208103816_Added_Access_To_Teaching")]
+    partial class Added_Access_To_Teaching
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
