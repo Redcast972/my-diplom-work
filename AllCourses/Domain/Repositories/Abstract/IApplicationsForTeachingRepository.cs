@@ -7,7 +7,7 @@ namespace AllCourses.Domain.Repositories.Abstract
         Task<ApplicationForTeachingEntity> GetApplicationForTeachingByUserNameAsync(string username);
         Task CreateApplicationForTeachingAsync(ApplicationForTeachingEntity application);
         Task DeleteApplicationForTeachingAsync(Guid id);
-        Task<List<ApplicationForTeachingEntity>> GetAllApplicationsForTeachingAsync();
+        Task<IEnumerable<ApplicationForTeachingEntity>> GetAllApplicationsForTeachingAsync();
         Task<ApplicationForTeachingEntity> GetApplicationForTeachingByIdAsync(Guid id);
         Task UpdateApplicationForTeachingAsync(ApplicationForTeachingEntity application);
     }

@@ -1,6 +1,7 @@
 ﻿using AllCourses.Domain.Entites.ApplicationsForTeaching;
 using AllCourses.Domain.Repositories.Abstract;
 using AllCourses.Models.Courses;
+using AllCourses.Models.News;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -84,12 +85,22 @@ namespace AllCourses.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [Route("[controller]/applications-to-teaching-list")]
-        public IActionResult ApplicationsToTeachingList()
+        [Route("[controller]/applications-to-teaching")]
+        public async Task<IActionResult> ApplicationsToTeachingList()
         {
-            var applicationsToTeachingList = _applicationsForTeachingRepository.GetAllApplicationsForTeachingAsync();
+            var applicationsToTeachingList = await _applicationsForTeachingRepository.GetAllApplicationsForTeachingAsync();
 
-            return View(applicationsToTeachingList);
+            var applications = applicationsToTeachingList.Select(n => new ApplicationToTeachingViewModel
+            {
+                Id = n.Id,
+                UserName= n.UserName,
+                UserEmail = n.UserEmail,
+                CreatedAt = n.CreatedAt,
+               
+            })
+             .ToList();
+
+            return View(applications);
         }
 
         [Authorize(Roles = "admin")]
