@@ -3,25 +3,43 @@
 @{
     Layout = "_Layout";
 }
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mt-6">
+    <div class="w-full max-w-[1200px] bg-white p-4 rounded-lg shadow-md">
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse text-sm text-gray-700">
+                <thead>
+                    <tr class="border-b bg-gray-100 text-left">
+                        <th class="p-4 font-semibold">Действия</th>
+                        <th class="p-4 font-semibold">Айди заявки</th>
+                        <th class="p-4 font-semibold">Имя пользователя</th>
+                        <th class="p-4 font-semibold">Почта пользователя</th>
+                        <th class="p-4 font-semibold">Дата подачи</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">
+                            <hr class="border-t border-gray-500">
+                        </td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="p-4"><a href="/courses/applications-to-teaching/@item.Id" class="text-blue-600">Открыть</a></td>
+                            <td class="p-4">@item.Id</td>
+                            <td class="p-4">@item.UserName</td>
+                            <td class="p-4">@item.UserEmail</td>
+                            <td class="p-4">@item.CreatedAt</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <hr class="border-t border-gray-100">
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<table class="min-w-full border-collapse border border-gray-300 text-sm text-gray-700">
-    <thead>
-        <tr class="bg-gray-200">
-            <th class="border border-gray-300 p-2">Айди заявки</th>
-            <th class="border border-gray-300 p-2">Имя пользователя</th>
-            <th class="border border-gray-300 p-2">Почта пользователя</th>
-            <th class="border border-gray-300 p-2">Дата подачи</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr class="border border-gray-300 hover:bg-gray-100">
-                <td class="border border-gray-300 p-2">@item.Id</td>
-                <td class="border border-gray-300 p-2">@item.UserName</td>
-                <td class="border border-gray-300 p-2">@item.UserEmail</td>
-                <td class="border border-gray-300 p-2">@item.CreatedAt</td>
-            </tr>
-        }
-    </tbody>
-</table>

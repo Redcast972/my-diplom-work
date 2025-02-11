@@ -31,7 +31,7 @@
                     @if (User.Identity?.IsAuthenticated == true)
                     {
                     // Отображаем изображение профиля и логин и email
-                        <div class="flex items-center space-x-3 cursor-pointer group relative">
+                        <div id="profile-menu-toggle"  class="flex items-center space-x-3 cursor-pointer relative">
                             <!-- Иконка профиля -->
 
                             <img src="/images/defaultProfileIcon.png" alt="Icon" class="w-10 h-10 rounded-full" />
@@ -43,7 +43,7 @@
                             </div>
 
                             <!-- Выпадающее меню -->
-                            <div class="absolute top-12 right-0 bg-white shadow-md rounded-md hidden group-hover:block z-10">
+                            <div id="profile-dropdown" class="absolute top-12 right-0 bg-white shadow-md rounded-md hidden z-10">
                                 <ul class="py-2 text-sm text-gray-700">
                                     <li>
                                         <a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Профиль</a>
@@ -127,4 +127,20 @@
     </footer>
     
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const profileMenu = document.getElementById("profile-menu-toggle");
+        const dropdown = document.getElementById("profile-dropdown");
+
+        document.addEventListener("click", function (event) {
+            if (profileMenu.contains(event.target)) {
+                dropdown.classList.toggle("hidden");
+            } else {
+                dropdown.classList.add("hidden");
+            }
+        });
+    });
+</script>
+
 </html>

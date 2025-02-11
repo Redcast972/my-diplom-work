@@ -41,7 +41,7 @@ namespace AllCourses.Controllers
         public async Task<IActionResult> GetAccessToCreateCoursesAsync()
         {
             var user = await userManager.GetUserAsync(User);
-            var application = _applicationsForTeachingRepository.GetApplicationForTeachingByUserNameAsync(user.UserName);
+            var application = await _applicationsForTeachingRepository.GetApplicationForTeachingByUserNameAsync(user.UserName);
 
             if (application != null)
             {

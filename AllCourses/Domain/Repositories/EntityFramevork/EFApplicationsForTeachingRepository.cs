@@ -27,11 +27,8 @@ namespace AllCourses.Domain.Repositories.EntityFramevork
 
         public async Task<ApplicationForTeachingEntity> GetApplicationForTeachingByUserNameAsync(string username)
         {
-            var application =  await _context.ApplicationsForTeaching.FirstAsync(m => m.UserName == username);
-            if (application == null)
-            {
-                return null;
-            }
+            var application =  await _context.ApplicationsForTeaching.FirstOrDefaultAsync(m => m.UserName == username);
+            
             return application;
         }
 
