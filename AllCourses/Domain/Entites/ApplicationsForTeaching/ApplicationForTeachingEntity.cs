@@ -17,6 +17,9 @@ namespace AllCourses.Domain.Entites.ApplicationsForTeaching
         [Required(ErrorMessage = "Почта пользователя не должен быть пустым")]
         public string UserEmail { get; set; }
 
+        [Required(ErrorMessage = "Статус заявки не должен быть пустым")]
+        public string Status { get; set; }
+
         [Required]
         public DateTime CreatedAt { get; set; }
     }

@@ -9,11 +9,27 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ApplicationsForTeaching",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    UserEmail = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationsForTeaching", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -54,6 +70,30 @@ namespace AllCourses.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CourseCategoryTypes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CourseCategoryType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseCategoryTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CoursePriceTypes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CoursePriceType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CoursePriceTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Messages",
                 columns: table => new
                 {
@@ -72,7 +112,7 @@ namespace AllCourses.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Title = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ImageData = table.Column<byte[]>(type: "bytea", nullable: false),
@@ -81,6 +121,21 @@ namespace AllCourses.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_News", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersAvatars",
+                columns: table => new
+                {
+                    ImageId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FileName = table.Column<string>(type: "text", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: false),
+                    ContentType = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersAvatars", x => x.ImageId);
                 });
 
             migrationBuilder.CreateTable(
@@ -196,7 +251,8 @@ namespace AllCourses.Migrations
                 {
                     { "1", null, "admin", "ADMIN" },
                     { "2", null, "moderator", "MODERATOR" },
-                    { "3", null, "user", "USER" }
+                    { "3", null, "teacher", "TEACHER" },
+                    { "4", null, "student", "STUDENT" }
                 });
 
             migrationBuilder.InsertData(
@@ -204,8 +260,8 @@ namespace AllCourses.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "1d5096ab-441c-4578-93a5-fab2b6d94bda", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEDpvwCWY6nwKPuAkBr35TIrqxVysdpu1V+3cL4zY4kPlXO4G4Lay6UXovBS9CADARQ==", null, false, "4f4a3437-cd5d-48c8-b052-42de5de2cad2", false, "admin" },
-                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "29cc7a80-3dff-4d79-b538-8a9b17b031fb", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEFooek+ztt5J4L+Aumn4SH+YYRZ5o+4koY2UIXMwlch4KcntVrbVhDyBro5L/l15BA==", null, false, "309408bb-3bbe-4fb1-ac14-46f4c0476494", false, "moderator" }
+                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "2e86ca93-0ef9-49a1-b42f-b3b23540c5ff", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEEvCOm0K3Lmn7dgJD5p303njz5vBrEv8tYzgJyXgrSwjX3xP9PDRVx6YdQED3XsJKg==", null, false, "42f6ce52-7ed0-446d-8b2e-a6992becdf16", false, "admin" },
+                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "16367117-3712-43fe-b214-455bd2f2f1e3", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAENkZEqRikScrdH1A7dQHdGFHoBtIOp6U82Oh15+ISzxDPfxXtjtLa/Stng4awR6PNg==", null, false, "a88f6ee8-bc7c-409f-9de4-bc58ebd05c7a", false, "moderator" }
                 });
 
             migrationBuilder.InsertData(
@@ -259,6 +315,9 @@ namespace AllCourses.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ApplicationsForTeaching");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -274,10 +333,19 @@ namespace AllCourses.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CourseCategoryTypes");
+
+            migrationBuilder.DropTable(
+                name: "CoursePriceTypes");
+
+            migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "News");
+
+            migrationBuilder.DropTable(
+                name: "UsersAvatars");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -77,6 +77,7 @@ namespace AllCourses.Controllers
                 Description = model.Discription,
                 UserName = user.UserName,
                 UserEmail= user.Email,
+                Status = "Отправлена на исполнение",
                 CreatedAt = DateTime.UtcNow,
             };
             
@@ -96,6 +97,7 @@ namespace AllCourses.Controllers
                 UserName= n.UserName,
                 UserEmail = n.UserEmail,
                 CreatedAt = n.CreatedAt,
+                Status  = n.Status,
                
             })
              .ToList();
@@ -105,9 +107,21 @@ namespace AllCourses.Controllers
 
         [Authorize(Roles = "admin")]
         [Route("[controller]/applications-to-teaching/{id}")]
-        public IActionResult ApplicationsToTeaching(Guid id)
+        public async Task<IActionResult> ApplicationToTeaching(Guid id)
         {
-            return View();
+            var applicationEntity = await _applicationsForTeachingRepository.GetApplicationForTeachingByIdAsync(id);
+
+            var application = new ApplicationToTeachingViewModel
+            {
+                Id= applicationEntity.Id,
+                UserName= applicationEntity.UserName,
+                UserEmail= applicationEntity.UserEmail,
+                Description = applicationEntity.Description,
+                CreatedAt = applicationEntity.CreatedAt,
+                Status = applicationEntity.Status,
+            };
+
+            return View(application);
         }
     }
 }

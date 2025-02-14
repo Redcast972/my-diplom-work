@@ -2,9 +2,11 @@
 @model List<ApplicationToTeachingViewModel>
 @{
     Layout = "_Layout";
+    ViewData["Title"] = "Заявки";
 }
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mt-6">
-    <div class="w-full max-w-[1200px] bg-white p-4 rounded-lg shadow-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-3xl font-bold text-600 mb-6">Заявки на преподавание</h1>
+    <div class="w-full max-w-[1300px] bg-white p-4 rounded-lg shadow-md">
         <div class="overflow-x-auto">
             <table class="w-full border-collapse text-sm text-gray-700">
                 <thead>
@@ -14,14 +16,11 @@
                         <th class="p-4 font-semibold">Имя пользователя</th>
                         <th class="p-4 font-semibold">Почта пользователя</th>
                         <th class="p-4 font-semibold">Дата подачи</th>
+                        <th class="p-4 font-semibold">Статус заявки</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="5">
-                            <hr class="border-t border-gray-500">
-                        </td>
-                    </tr>
+                    
                     @foreach (var item in Model)
                     {
                         <tr class="border-b hover:bg-gray-50">
@@ -30,6 +29,7 @@
                             <td class="p-4">@item.UserName</td>
                             <td class="p-4">@item.UserEmail</td>
                             <td class="p-4">@item.CreatedAt</td>
+                            <td class="p-4">@item.Status</td
                         </tr>
                         <tr>
                             <td colspan="5">
