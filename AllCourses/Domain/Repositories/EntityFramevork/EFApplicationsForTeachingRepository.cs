@@ -22,14 +22,15 @@ namespace AllCourses.Domain.Repositories.EntityFramevork
 
         public async Task<ApplicationForTeachingEntity> GetApplicationForTeachingByIdAsync(Guid id)
         {
-            return await _context.ApplicationsForTeaching.FirstOrDefaultAsync(m => m.Id == id);
+            return await _context.ApplicationsForTeaching.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<ApplicationForTeachingEntity> GetApplicationForTeachingByUserNameAsync(string username)
         {
-            var application =  await _context.ApplicationsForTeaching.FirstOrDefaultAsync(m => m.UserName == username);
-            
-            return application;
+            return await _context.ApplicationsForTeaching
+            .Where(m => m.UserName == username)
+            .OrderByDescending(m => m.CreatedAt) // Предполагаем, что есть поле CreatedAt
+            .FirstOrDefaultAsync();
         }
 
         public async Task CreateApplicationForTeachingAsync(ApplicationForTeachingEntity application)

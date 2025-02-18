@@ -43,11 +43,13 @@ namespace AllCourses.Controllers
             var user = await userManager.GetUserAsync(User);
             var application = await _applicationsForTeachingRepository.GetApplicationForTeachingByUserNameAsync(user.UserName);
 
-            if (application != null)
+            if (application.Status == "Отправлена на исполнение" || application.Status == "Принята")
             {
                 return RedirectToAction("CreateApplicationAccessDenied");
             }
+
             return View();
+            
         }
 
         [Authorize(Roles = "student")]
@@ -122,6 +124,38 @@ namespace AllCourses.Controllers
             };
 
             return View(application);
+        }
+
+        [Authorize(Roles = "admin")]
+        [Route("[controller]/applications-to-teaching/{id}/reject")]
+        public async Task<IActionResult> ApplicationToTeachingReject(Guid id)
+        {
+            var applicationEntity = await _applicationsForTeachingRepository.GetApplicationForTeachingByIdAsync(id);
+
+            var rejectApplicationEntity = new ApplicationForTeachingEntity
+            {
+                Id = applicationEntity.Id,
+                UserName = applicationEntity.UserName,
+                UserEmail = applicationEntity.UserEmail,
+                Description = applicationEntity.Description,
+                CreatedAt = applicationEntity.CreatedAt,
+                Status = "Отклонена",
+            };
+
+            await _applicationsForTeachingRepository.UpdateApplicationForTeachingAsync(rejectApplicationEntity);
+
+            return RedirectToAction("ApplicationsToTeachingList");
+        }
+
+        [Authorize(Roles = "admin")]
+        [Route("[controller]/applications-to-teaching/{id}/accept")]
+        public async Task<IActionResult> ApplicationToTeachingAccept(Guid id)
+        {
+            var applicationEntity = await _applicationsForTeachingRepository.GetApplicationForTeachingByIdAsync(id);
+
+
+
+            return RedirectToAction("ApplicationsToTeachingList");
         }
     }
 }
