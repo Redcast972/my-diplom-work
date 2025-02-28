@@ -153,9 +153,33 @@ namespace AllCourses.Controllers
         {
             var applicationEntity = await _applicationsForTeachingRepository.GetApplicationForTeachingByIdAsync(id);
 
+            var acceptApplicationEntity = new ApplicationForTeachingEntity
+            {
+                Id = applicationEntity.Id,
+                UserName = applicationEntity.UserName,
+                UserEmail = applicationEntity.UserEmail,
+                Description = applicationEntity.Description,
+                CreatedAt = applicationEntity.CreatedAt,
+                Status = "Принята",
+            };
 
+            await _applicationsForTeachingRepository.UpdateApplicationForTeachingAsync(acceptApplicationEntity);
 
-            return RedirectToAction("ApplicationsToTeachingList");
+            var user = await userManager.FindByEmailAsync(applicationEntity.UserEmail);
+
+            if (user != null)
+            {
+                var roles = await userManager.GetRolesAsync(user);
+                await userManager.RemoveFromRolesAsync(user, roles); // Удаляем старые роли
+
+                var result = await userManager.AddToRoleAsync(user, "teacher"); // Добавляем новую роль
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ApplicationsToTeachingList");
+                }
+            }
+
+            return View("Error", "Ошибка при принятии заявки");
         }
     }
 }
