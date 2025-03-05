@@ -111,5 +111,11 @@ namespace AllCourses.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+
+        public async Task<IActionResult> Profile(string userName)
+        {
+            IdentityUser user = await userManager.FindByNameAsync(userName);
+            return View(user);
+        }
     }
 }
