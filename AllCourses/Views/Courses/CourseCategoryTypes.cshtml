@@ -1,0 +1,56 @@
+﻿@using AllCourses.Domain.Entites.Courses
+@{
+    Layout = "_Layout";
+}
+@model List<CourseCategoryTypeEntity>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-3xl font-bold text-indigo-600 mb-6">Категории курсов</h1>
+    <form action="/courses/add-category-type" method="post" enctype="multipart/form-data" class="space-y-6 bg-white p-8 rounded-lg shadow-md">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">
+                Категория курса
+            </label>
+            <input 
+                   class="appearance-none rounded-lg block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                   placeholder="Введите название категории" />
+            <span class="text-red-600"></span>
+        </div>
+
+        <div class="flex justify-between">           
+            <button type="submit" class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md">
+                Добавить
+            </button>
+        </div>
+    </form>
+
+    <div class="w-full max-w-[1300px] bg-white p-4 rounded-lg shadow-md">
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse text-sm text-gray-700">
+                <thead>
+                    <tr class="border-b bg-gray-100 text-left">
+                        <th class="p-4 font-semibold">Действия</th>
+                        <th class="p-4 font-semibold">Айди категории</th>
+                        <th class="p-4 font-semibold">Название категории</th>                       
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @foreach (var item in Model)
+                    {
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="p-4"><a href="/courses/applications-to-teaching/@item.Id" class="text-blue-600">Открыть</a></td>
+                            <td class="p-4">@item.Id</td>
+                            <td class="p-4">@item.CourseCategoryType</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <hr class="border-t border-gray-100">
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

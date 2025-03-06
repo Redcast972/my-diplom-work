@@ -46,7 +46,7 @@
                             <div id="profile-dropdown" class="absolute top-12 right-0 bg-white shadow-md rounded-md hidden z-10">
                                 <ul class="py-2 text-sm text-gray-700">
                                     <li>
-                                        <a href="/account/profile?@User." class="block px-4 py-2 hover:bg-gray-100">Профиль</a>
+                                        <a href="@Url.Action("Profile", "Account", new { userName = User.Identity.Name })" class="block px-4 py-2 hover:bg-gray-100">Профиль</a>
                                     </li>
                                     <li>
                                         <a href="/settings" class="block px-4 py-2 hover:bg-gray-100">Настройки</a>

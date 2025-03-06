@@ -26,6 +26,7 @@ builder.Services.AddTransient<INewsRepository, EFNewsRepository>();
 builder.Services.AddTransient<IUserAvatarsRepository, EFUserAvatarsRepository>();
 builder.Services.AddTransient<IApplicationsForTeachingRepository, EFApplicationsForTeachingRepository>();
 builder.Services.AddTransient<ICoursePriceTypesRepository, EFCoursePriceTypesRepository>();
+builder.Services.AddTransient<ICourseCategoryTypeRepository, EFCourseCategoryTypeRepository>();
 
 //настраивем Identity систему
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(ops =>

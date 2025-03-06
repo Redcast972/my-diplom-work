@@ -1,4 +1,5 @@
 ﻿using AllCourses.Domain.Entites.ApplicationsForTeaching;
+using AllCourses.Domain.Entites.Courses;
 using AllCourses.Domain.Repositories.Abstract;
 using AllCourses.Models.Courses;
 using AllCourses.Models.News;
@@ -13,11 +14,13 @@ namespace AllCourses.Controllers
     public class CoursesController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
-        public IApplicationsForTeachingRepository _applicationsForTeachingRepository;
-        public CoursesController(IApplicationsForTeachingRepository applicationsForTeachingRepository, UserManager<IdentityUser> userMgr)  
+        private readonly IApplicationsForTeachingRepository _applicationsForTeachingRepository;
+        private readonly ICourseCategoryTypeRepository _courseCategoryTypeRepository;
+        public CoursesController(IApplicationsForTeachingRepository applicationsForTeachingRepository, UserManager<IdentityUser> userMgr, ICourseCategoryTypeRepository courseCategoryTypeRepository)  
         {
             _applicationsForTeachingRepository = applicationsForTeachingRepository; 
             userManager = userMgr;
+            _courseCategoryTypeRepository = courseCategoryTypeRepository;
         }
 
         public IActionResult Index()
@@ -180,6 +183,23 @@ namespace AllCourses.Controllers
             }
 
             return View("Error", "Ошибка при принятии заявки");
+        }
+
+        [Authorize(Roles = "admin")]
+        [Route("[controller]/category-types")]
+        public async Task<IActionResult> CourseCategoryTypes()
+        {
+            var categoryTypes = await _courseCategoryTypeRepository.GetAllCourseCategoryTypesAsync(); 
+            return View(categoryTypes);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        [Route("[controller]/category-types")]
+        public async Task<IActionResult> CourseCategoryTypes(CourseCategoryTypeEntity courseCategoryType)
+        {
+            await _courseCategoryTypeRepository.CreateCourseCategoryTypeAsync(courseCategoryType);
+            return RedirectToAction("AddCategoryType");
         }
     }
 }
