@@ -22,6 +22,16 @@
                 Создать курс
             </a>
         }
+
+        @if (User.IsInRole("admin"))
+        {
+            <a href="/courses/category-types" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
+                Категории курсов
+            </a>
+            <a href="/courses/category-types/add" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
+                Добавить новую категорию
+            </a>
+        }
     </div>
 
     <!-- Сетка карточек новостей -->

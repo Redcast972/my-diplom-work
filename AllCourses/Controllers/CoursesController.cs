@@ -187,19 +187,32 @@ namespace AllCourses.Controllers
 
         [Authorize(Roles = "admin")]
         [Route("[controller]/category-types")]
-        public async Task<IActionResult> CourseCategoryTypes()
+        public async Task<IActionResult> CourseCategoryTypesList()
         {
             var categoryTypes = await _courseCategoryTypeRepository.GetAllCourseCategoryTypesAsync(); 
             return View(categoryTypes);
         }
 
+
+        [Authorize(Roles = "admin")]
+        [Route("[controller]/category-types/add")]
+        public async Task<IActionResult> AddCourseCategoryType()
+        {
+            return View();
+        }
+
         [HttpPost]
         [Authorize(Roles = "admin")]
-        [Route("[controller]/category-types")]
-        public async Task<IActionResult> CourseCategoryTypes(CourseCategoryTypeEntity courseCategoryType)
+        [Route("[controller]/category-types/add")]
+        public async Task<IActionResult> AddCourseCategoryType(string courseCategoryType)
         {
-            await _courseCategoryTypeRepository.CreateCourseCategoryTypeAsync(courseCategoryType);
-            return RedirectToAction("AddCategoryType");
+            CourseCategoryTypeEntity courseCategory = new CourseCategoryTypeEntity()
+            {
+                Id= Guid.NewGuid(),
+                CourseCategoryType = courseCategoryType
+            };
+            await _courseCategoryTypeRepository.CreateCourseCategoryTypeAsync(courseCategory);
+            return RedirectToAction("CourseCategoryTypesList");
         }
     }
 }
