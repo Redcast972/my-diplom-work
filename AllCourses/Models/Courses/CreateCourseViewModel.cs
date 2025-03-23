@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace AllCourses.Models.Courses
 {
@@ -8,17 +9,17 @@ namespace AllCourses.Models.Courses
         [Display(Name = "Загаловок")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Поле контента не должно быть пустым.")]
-        [Display(Name = "Контент")]
+        [Required(ErrorMessage = "Поле описания не должно быть пустым.")]
+        [Display(Name = "Описание")]
         public string Discription { get; set; }
 
         [Required(ErrorMessage = "Поле типа цены не должно быть пустым.")]
         [Display(Name = "Тип цены")]
-        public string CoursePriceType { get; set; }
+        public List<SelectListItem> CoursePrices { get; set; } = new();
 
         [Required(ErrorMessage = "Поле типа курса не должно быть пустым.")]
         [Display(Name = "Тип курса")]
-        public string CourseCategoryType { get; set; }
+        public List<SelectListItem> CourseCategories { get; set; } = new();
 
         [Required(ErrorMessage = "Вы не выбрали изображение.")]
         public IFormFile ImageFile { get; set; }

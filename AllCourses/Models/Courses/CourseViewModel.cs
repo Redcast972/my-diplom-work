@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace AllCourses.Models.Courses
 {
@@ -27,5 +28,7 @@ namespace AllCourses.Models.Courses
         public string CourseCategoryType { get; set; }
         public DateTime CreatedAt { get; set; }
         public byte[] ImageData { get; set; }
+
+        
     }
 }

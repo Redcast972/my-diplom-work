@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace AllCourses.Controllers
@@ -34,9 +35,21 @@ namespace AllCourses.Controllers
         }
 
         [Authorize(Roles = "teacher")]
-        public IActionResult AddCourse()
+        public async Task<IActionResult> AddCourse()
         {
-            return View();
+            var categories = await _courseCategoryTypeRepository.GetAllCourseCategoryTypesAsync();
+            
+            var model = new CreateCourseViewModel
+            {
+
+                CourseCategories = categories.Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),  // ID категории
+                    Text = c.CourseCategoryType // Название категории
+                }).ToList()
+            };
+
+            return View(model);
         }
 
         [Authorize(Roles = "student")]
