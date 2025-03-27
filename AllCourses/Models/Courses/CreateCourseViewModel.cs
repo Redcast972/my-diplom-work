@@ -13,10 +13,6 @@ namespace AllCourses.Models.Courses
         [Display(Name = "Описание")]
         public string Discription { get; set; }
 
-        [Required(ErrorMessage = "Поле типа цены не должно быть пустым.")]
-        [Display(Name = "Тип цены")]
-        public List<SelectListItem> CoursePrices { get; set; } = new();
-
         [Required(ErrorMessage = "Поле типа курса не должно быть пустым.")]
         [Display(Name = "Тип курса")]
         public List<SelectListItem> CourseCategories { get; set; } = new();

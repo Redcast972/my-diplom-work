@@ -48,6 +48,15 @@
                                     <li>
                                         <a href="@Url.Action("Profile", "Account", new { userName = User.Identity.Name })" class="block px-4 py-2 hover:bg-gray-100">Профиль</a>
                                     </li>
+                                    @if (User.IsInRole("teacher"))
+                                    {
+                                        <li><a href="@Url.Action("Teaching", "Courses", new { userName = User.Identity.Name })" class="block px-4 py-2 hover:bg-gray-100">Преподавание</a></li>
+                                        <li><a href="@Url.Action("MyCourses", "Courses", new { userName = User.Identity.Name })" class="block px-4 py-2 hover:bg-gray-100">Мои курсы</a></li>
+                                    }
+                                    @if (User.IsInRole("student"))
+                                    {
+                                        <li><a href="@Url.Action("MyCourses", "Courses", new { userName = User.Identity.Name })" class="block px-4 py-2 hover:bg-gray-100">Мои курсы</a></li>
+                                    }
                                     <li>
                                         <a href="/settings" class="block px-4 py-2 hover:bg-gray-100">Настройки</a>
                                     </li>

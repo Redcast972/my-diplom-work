@@ -106,6 +106,16 @@ namespace AllCourses.Controllers
             return View();
         }
 
+        public IActionResult Teaching()
+        {
+            return View();
+        }
+
+        public IActionResult MyCourses(string userName)
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
