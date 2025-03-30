@@ -52,6 +52,13 @@ namespace AllCourses.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "teacher")]
+        public async Task<IActionResult> AddCourse(CreateCourseViewModel model)
+        {
+            return RedirectToAction("");
+        }
+
         [Authorize(Roles = "student")]
         [Route("[controller]/get-access-to-create-courses")]
         public async Task<IActionResult> GetAccessToCreateCoursesAsync()
@@ -226,6 +233,13 @@ namespace AllCourses.Controllers
             };
             await _courseCategoryTypeRepository.CreateCourseCategoryTypeAsync(courseCategory);
             return RedirectToAction("CourseCategoryTypesList");
+        }
+
+        [Authorize(Roles = "teacher")]
+        public async Task<IActionResult> Teaching(string name)
+        {
+
+            return View();
         }
     }
 }

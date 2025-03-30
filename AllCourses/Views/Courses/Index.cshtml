@@ -9,12 +9,6 @@
     <!-- Верхний блок с заголовком и кнопкой -->
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold text-600">Курсы</h1>
-        @if (User.IsInRole("teacher"))
-        {
-            <a href="/courses/addcourse" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
-                Создать курс
-            </a>
-        }
 
         @if (User.IsInRole("student"))
         {
