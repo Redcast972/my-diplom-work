@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Models.Courses
+namespace AllCourses.Domain.Entites.Courses
 {
-    public class CourseViewModel
+    public class CourseInformationViewEntity
     {
         public Guid Id { get; set; }
 
@@ -24,7 +23,5 @@ namespace AllCourses.Models.Courses
         public string CourseCategoryType { get; set; }
         public DateTime CreatedAt { get; set; }
         public byte[] ImageData { get; set; }
-
-        
     }
 }

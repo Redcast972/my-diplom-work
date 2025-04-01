@@ -1,4 +1,5 @@
-﻿using AllCourses.Domain.Entites.ApplicationsForTeaching;
+﻿using AllCourses.Domain;
+using AllCourses.Domain.Entites.ApplicationsForTeaching;
 using AllCourses.Domain.Entites.Courses;
 using AllCourses.Domain.Repositories.Abstract;
 using AllCourses.Models.Courses;
@@ -17,11 +18,13 @@ namespace AllCourses.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly IApplicationsForTeachingRepository _applicationsForTeachingRepository;
         private readonly ICourseCategoryTypeRepository _courseCategoryTypeRepository;
-        public CoursesController(IApplicationsForTeachingRepository applicationsForTeachingRepository, UserManager<IdentityUser> userMgr, ICourseCategoryTypeRepository courseCategoryTypeRepository)  
+        private AllCoursesDbContext _context;
+        public CoursesController(IApplicationsForTeachingRepository applicationsForTeachingRepository, UserManager<IdentityUser> userMgr, ICourseCategoryTypeRepository courseCategoryTypeRepository, AllCoursesDbContext context)  
         {
             _applicationsForTeachingRepository = applicationsForTeachingRepository; 
             userManager = userMgr;
             _courseCategoryTypeRepository = courseCategoryTypeRepository;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -56,6 +59,10 @@ namespace AllCourses.Controllers
         [Authorize(Roles = "teacher")]
         public async Task<IActionResult> AddCourse(CreateCourseViewModel model)
         {
+            //Принимаем модельку созданного курса и сетим данные
+
+
+
             return RedirectToAction("");
         }
 
