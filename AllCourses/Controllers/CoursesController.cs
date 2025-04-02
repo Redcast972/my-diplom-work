@@ -60,7 +60,7 @@ namespace AllCourses.Controllers
         public async Task<IActionResult> AddCourse(CreateCourseViewModel model)
         {
             //Принимаем модельку созданного курса и сетим данные
-
+             
 
 
             return RedirectToAction("");

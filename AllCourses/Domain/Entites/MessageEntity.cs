@@ -6,6 +6,7 @@ namespace AllCourses.Domain.Entites
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
+        public string Author { get; set; }
 
         [Required(ErrorMessage = "Сообщение не должно быть пустым")]
         [Display(Name = "Сообщение")]

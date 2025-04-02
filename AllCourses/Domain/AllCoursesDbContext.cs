@@ -17,7 +17,7 @@ namespace AllCourses.Domain
         public DbSet<UserAvatarEntity> UsersAvatars { get; set; }
         public DbSet<CourseCategoryTypeEntity> CourseCategoryTypes { get; set; }
         public DbSet<ApplicationForTeachingEntity> ApplicationsForTeaching { get; set; }
-        public DbSet<CourseInformationViewEntity> CoursesForView { get; set; }
+        public DbSet<CourseEntity> Courses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
