@@ -18,6 +18,8 @@ namespace AllCourses.Domain
         public DbSet<CourseCategoryTypeEntity> CourseCategoryTypes { get; set; }
         public DbSet<ApplicationForTeachingEntity> ApplicationsForTeaching { get; set; }
         public DbSet<CourseEntity> Courses { get; set; }
+        public DbSet<LessonEntity> Lessons { get; set; }
+        public DbSet<TestEntity> Tests { get; set; }    
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

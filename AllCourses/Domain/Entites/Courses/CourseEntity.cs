@@ -17,11 +17,11 @@ namespace AllCourses.Domain.Entites.Courses
         [Required(ErrorMessage = "Поле автора не должно быть пустым.")]
         [Display(Name = "Автор")]
         public string Author { get; set; }
-        public Guid AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         [Required(ErrorMessage = "Поле категории курса не должно быть пустым.")]
         [Display(Name = "Категория кура")]
-        public string CourseCategoryType { get; set; }
+        public string CourseCategory { get; set; }
         public DateTime CreatedAt { get; set; }
         public byte[] ImageData { get; set; }
         public List<LessonEntity> Lessons { get; set; }
@@ -33,6 +33,7 @@ namespace AllCourses.Domain.Entites.Courses
     public class LessonEntity
     {
         public Guid Id { get; set; }
+        public Guid CourseId { get; set; }
         public string Title { get; set; }
         public string Discription { get; set; }
         public byte[] ImageData { get; set; }
@@ -42,6 +43,7 @@ namespace AllCourses.Domain.Entites.Courses
     public class TestEntity
     {
         public Guid Id { get; set; }
+        public Guid CourseId { get; set; }
         public string Question { get; set; }
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }

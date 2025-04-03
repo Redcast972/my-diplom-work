@@ -15,6 +15,9 @@ namespace AllCourses.Models.Courses
 
         [Required(ErrorMessage = "Поле типа курса не должно быть пустым.")]
         [Display(Name = "Тип курса")]
+
+        public string CourseCategory { get; set; }
+
         public List<SelectListItem> CourseCategories { get; set; } = new();
 
         [Required(ErrorMessage = "Вы не выбрали изображение.")]

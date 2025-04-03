@@ -85,3 +85,5 @@ app.UseEndpoints(endpoints =>
 
 app.Run();
 
+//СОЗДАТЬ МИГРАЦИЮ: dotnet ef migrations add ВашеНазваниеМиграции
+//ПРИМЕНЕНИЕ МИГРАЦИИ К БД: dotnet ef database update

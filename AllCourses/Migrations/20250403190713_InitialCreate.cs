@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -9,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -82,29 +83,22 @@ namespace AllCourses.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CoursePriceTypes",
+                name: "Courses",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CoursePriceType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Discription = table.Column<string>(type: "text", nullable: false),
+                    Author = table.Column<string>(type: "text", nullable: false),
+                    AuthorId = table.Column<string>(type: "text", nullable: false),
+                    CourseCategory = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: false),
+                    Students = table.Column<List<Guid>>(type: "uuid[]", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CoursePriceTypes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Messages",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Message = table.Column<string>(type: "text", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.PrimaryKey("PK_Courses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -244,6 +238,70 @@ namespace AllCourses.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LessonEntity",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Discription = table.Column<string>(type: "text", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: false),
+                    LinksToVideoTutorials = table.Column<string[]>(type: "text[]", nullable: false),
+                    CourseEntityId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LessonEntity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LessonEntity_Courses_CourseEntityId",
+                        column: x => x.CourseEntityId,
+                        principalTable: "Courses",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Author = table.Column<string>(type: "text", nullable: false),
+                    Message = table.Column<string>(type: "text", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CourseEntityId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_Courses_CourseEntityId",
+                        column: x => x.CourseEntityId,
+                        principalTable: "Courses",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TestEntity",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Question = table.Column<string>(type: "text", nullable: false),
+                    Answer1 = table.Column<string>(type: "text", nullable: false),
+                    Answer2 = table.Column<string>(type: "text", nullable: false),
+                    Answer3 = table.Column<string>(type: "text", nullable: false),
+                    CorrectAnswerNumber = table.Column<int>(type: "integer", nullable: false),
+                    CourseEntityId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TestEntity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TestEntity_Courses_CourseEntityId",
+                        column: x => x.CourseEntityId,
+                        principalTable: "Courses",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -260,8 +318,8 @@ namespace AllCourses.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "2e86ca93-0ef9-49a1-b42f-b3b23540c5ff", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEEvCOm0K3Lmn7dgJD5p303njz5vBrEv8tYzgJyXgrSwjX3xP9PDRVx6YdQED3XsJKg==", null, false, "42f6ce52-7ed0-446d-8b2e-a6992becdf16", false, "admin" },
-                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "16367117-3712-43fe-b214-455bd2f2f1e3", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAENkZEqRikScrdH1A7dQHdGFHoBtIOp6U82Oh15+ISzxDPfxXtjtLa/Stng4awR6PNg==", null, false, "a88f6ee8-bc7c-409f-9de4-bc58ebd05c7a", false, "moderator" }
+                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "2189a539-3c9f-4c5e-a8e6-e85e0ab797ae", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEKRn77lSwiWhg/pmNj5MnAAClkGHYHc5LZYOzyvNNoxgOB0zAIn9lM0U6c94MjJ4jg==", null, false, "02753eae-b661-4e14-a8be-2c73d54a340e", false, "admin" },
+                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "ba88bdae-3fdf-4b1a-917c-0df9e91334cf", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEEE6Pc+UDfFNvgjiNP+Q3/zGkYI4PZ+Unikw9EhnRpObANoNz7eZHBc8S1DnSEKVcQ==", null, false, "ad145c36-53e0-4140-bb29-a1e376e485ba", false, "moderator" }
                 });
 
             migrationBuilder.InsertData(
@@ -309,6 +367,21 @@ namespace AllCourses.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LessonEntity_CourseEntityId",
+                table: "LessonEntity",
+                column: "CourseEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_CourseEntityId",
+                table: "Messages",
+                column: "CourseEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TestEntity_CourseEntityId",
+                table: "TestEntity",
+                column: "CourseEntityId");
         }
 
         /// <inheritdoc />
@@ -336,13 +409,16 @@ namespace AllCourses.Migrations
                 name: "CourseCategoryTypes");
 
             migrationBuilder.DropTable(
-                name: "CoursePriceTypes");
+                name: "LessonEntity");
 
             migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "News");
+
+            migrationBuilder.DropTable(
+                name: "TestEntity");
 
             migrationBuilder.DropTable(
                 name: "UsersAvatars");
@@ -352,6 +428,9 @@ namespace AllCourses.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
         }
     }
 }

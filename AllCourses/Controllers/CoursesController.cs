@@ -59,9 +59,29 @@ namespace AllCourses.Controllers
         [Authorize(Roles = "teacher")]
         public async Task<IActionResult> AddCourse(CreateCourseViewModel model)
         {
+            IdentityUser user = await userManager.FindByNameAsync(User.Identity.Name);
+            using var memoryStream = new MemoryStream();
+            await model.ImageFile.CopyToAsync(memoryStream);
+            var imageBytes = memoryStream.ToArray();
             //Принимаем модельку созданного курса и сетим данные
-             
+            var course = new CourseEntity()
+            {
+                Id = Guid.NewGuid(),
+                Title = model.Title,
+                Discription = model.Discription,
+                CourseCategory = model.CourseCategory,
+                Author = User.Identity.Name,
+                AuthorId = user.Id,
+                ImageData = imageBytes,
+                CreatedAt = DateTime.UtcNow,
+                Lessons = null,
+                Students = null,
+                Commentaries = null,
+                Tests = null
+            };
 
+            await _context.Courses.AddAsync(course);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("");
         }
