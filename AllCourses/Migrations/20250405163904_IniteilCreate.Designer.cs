@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     [DbContext(typeof(AllCoursesDbContext))]
-    [Migration("20250403190713_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250405163904_IniteilCreate")]
+    partial class IniteilCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,6 +87,9 @@ namespace AllCourses.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<List<string>>("CommentariesId")
+                        .HasColumnType("text[]");
+
                     b.Property<string>("CourseCategory")
                         .IsRequired()
                         .HasColumnType("text");
@@ -102,9 +105,14 @@ namespace AllCourses.Migrations
                         .IsRequired()
                         .HasColumnType("bytea");
 
-                    b.Property<List<Guid>>("Students")
-                        .IsRequired()
-                        .HasColumnType("uuid[]");
+                    b.Property<List<string>>("LessonsId")
+                        .HasColumnType("text[]");
+
+                    b.Property<List<string>>("StudentsId")
+                        .HasColumnType("text[]");
+
+                    b.Property<List<string>>("TestsId")
+                        .HasColumnType("text[]");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -121,8 +129,9 @@ namespace AllCourses.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CourseEntityId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("CourseId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Discription")
                         .IsRequired()
@@ -132,8 +141,7 @@ namespace AllCourses.Migrations
                         .IsRequired()
                         .HasColumnType("bytea");
 
-                    b.Property<string[]>("LinksToVideoTutorials")
-                        .IsRequired()
+                    b.Property<List<string>>("LinksToVideoTutorials")
                         .HasColumnType("text[]");
 
                     b.Property<string>("Title")
@@ -142,9 +150,7 @@ namespace AllCourses.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseEntityId");
-
-                    b.ToTable("LessonEntity");
+                    b.ToTable("Lessons");
                 });
 
             modelBuilder.Entity("AllCourses.Domain.Entites.Courses.TestEntity", b =>
@@ -168,7 +174,7 @@ namespace AllCourses.Migrations
                     b.Property<int>("CorrectAnswerNumber")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("CourseEntityId")
+                    b.Property<Guid>("CourseId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Question")
@@ -177,23 +183,21 @@ namespace AllCourses.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseEntityId");
-
-                    b.ToTable("TestEntity");
+                    b.ToTable("Tests");
                 });
 
             modelBuilder.Entity("AllCourses.Domain.Entites.MessageEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("CourseEntityId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("CourseId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
@@ -202,12 +206,11 @@ namespace AllCourses.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CourseEntityId");
 
                     b.ToTable("Messages");
                 });
@@ -416,15 +419,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "6c0eff69-b00a-49ba-b093-2e9e974828f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2189a539-3c9f-4c5e-a8e6-e85e0ab797ae",
+                            ConcurrencyStamp = "d841fce8-f549-4fec-99d3-d7be8d0a7331",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKRn77lSwiWhg/pmNj5MnAAClkGHYHc5LZYOzyvNNoxgOB0zAIn9lM0U6c94MjJ4jg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEMx5KKVJk3Zfss87FcHzb6ELiR+TuLYStiOHSxghY08vxLXV1uN1y/kH4acyl5HyA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "02753eae-b661-4e14-a8be-2c73d54a340e",
+                            SecurityStamp = "d3dac2cd-c604-4c5b-948c-077fd9d54deb",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -432,15 +435,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "ef26d68c-2299-407b-a953-a8a63dda5f5c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba88bdae-3fdf-4b1a-917c-0df9e91334cf",
+                            ConcurrencyStamp = "f85d7d79-5481-4257-bd5d-d9809fb8cd6a",
                             Email = "moderator@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MODERATOR@GMAIL.COM",
                             NormalizedUserName = "MODERATOR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEE6Pc+UDfFNvgjiNP+Q3/zGkYI4PZ+Unikw9EhnRpObANoNz7eZHBc8S1DnSEKVcQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBTpxtXbqr6EtcjlHyltFVm+zMMxkIJlgbGxdHwHngfWQsVPEReTCPRJa0HBhj5S7w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ad145c36-53e0-4140-bb29-a1e376e485ba",
+                            SecurityStamp = "d913fc7d-977f-4f9a-bc70-d069fc30544c",
                             TwoFactorEnabled = false,
                             UserName = "moderator"
                         });
@@ -539,27 +542,6 @@ namespace AllCourses.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AllCourses.Domain.Entites.Courses.LessonEntity", b =>
-                {
-                    b.HasOne("AllCourses.Domain.Entites.Courses.CourseEntity", null)
-                        .WithMany("Lessons")
-                        .HasForeignKey("CourseEntityId");
-                });
-
-            modelBuilder.Entity("AllCourses.Domain.Entites.Courses.TestEntity", b =>
-                {
-                    b.HasOne("AllCourses.Domain.Entites.Courses.CourseEntity", null)
-                        .WithMany("Tests")
-                        .HasForeignKey("CourseEntityId");
-                });
-
-            modelBuilder.Entity("AllCourses.Domain.Entites.MessageEntity", b =>
-                {
-                    b.HasOne("AllCourses.Domain.Entites.Courses.CourseEntity", null)
-                        .WithMany("Commentaries")
-                        .HasForeignKey("CourseEntityId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -609,15 +591,6 @@ namespace AllCourses.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AllCourses.Domain.Entites.Courses.CourseEntity", b =>
-                {
-                    b.Navigation("Commentaries");
-
-                    b.Navigation("Lessons");
-
-                    b.Navigation("Tests");
                 });
 #pragma warning restore 612, 618
         }

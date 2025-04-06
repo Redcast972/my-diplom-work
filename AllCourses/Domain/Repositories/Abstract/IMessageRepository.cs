@@ -8,9 +8,9 @@ namespace AllCourses.Domain.Repositories.Abstract
         Task CreateMessageAsync(MessageEntity message);
 
         // Получить сообщение по идентификатору
-        Task<MessageEntity> GetMessageByIdAsync(Guid id);
+        Task<MessageEntity> GetMessageByIdAsync(string id);
 
-        Task<IEnumerable<MessageEntity>> GetMessagesByUserIdAsync(Guid userId);
+        Task<IEnumerable<MessageEntity>> GetMessagesByUserIdAsync(string userId);
 
         // Получить все сообщения
         Task<IEnumerable<MessageEntity>> GetAllMessagesAsync();
@@ -19,7 +19,7 @@ namespace AllCourses.Domain.Repositories.Abstract
         Task UpdateMessageAsync(MessageEntity message);
 
         // Удалить сообщение по идентификатору
-        Task DeleteMessageAsync(Guid id);
+        Task DeleteMessageAsync(string id);
     }
 
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace AllCourses.Controllers
@@ -32,9 +33,10 @@ namespace AllCourses.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public async Task<IActionResult> Details(Guid id)
         {
-            return View();
+            var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
+            return View(course);
         }
 
         [Authorize(Roles = "teacher")]
@@ -74,16 +76,47 @@ namespace AllCourses.Controllers
                 AuthorId = user.Id,
                 ImageData = imageBytes,
                 CreatedAt = DateTime.UtcNow,
-                Lessons = null,
-                Students = null,
-                Commentaries = null,
-                Tests = null
+                LessonsId = new List<string>(),
+                StudentsId = new List<string>(),
+                CommentariesId = new List<string>(),
+                TestsId = new List<string>()
             };
 
             await _context.Courses.AddAsync(course);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("");
+        }
+
+        [Authorize(Roles = "teacher")]
+        public async Task<IActionResult> AddLesson()
+        {
+            //TODO Сделать добавление уроков
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "teacher")]
+        public async Task<IActionResult> AddLesson(LessonEntity lesson)
+        {
+            //TODO Сделать добавление уроков
+            return View();
+        }
+
+        
+        [Authorize(Roles = "teacher")]
+        public async Task<IActionResult> AddTest()
+        {
+            //TODO Сделать добавление тестов
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "teacher")]
+        public async Task<IActionResult> AddTest(TestEntity test)
+        {
+            //TODO Сделать добавление тестов
+            return View();
         }
 
         [Authorize(Roles = "student")]
@@ -93,13 +126,18 @@ namespace AllCourses.Controllers
             var user = await userManager.GetUserAsync(User);
             var application = await _applicationsForTeachingRepository.GetApplicationForTeachingByUserNameAsync(user.UserName);
 
+            if (application == null)
+            {
+                return View();
+            }
+
             if (application.Status == "Отправлена на исполнение" || application.Status == "Принята")
             {
                 return RedirectToAction("CreateApplicationAccessDenied");
             }
+            
 
             return View();
-            
         }
 
         [Authorize(Roles = "student")]
@@ -263,10 +301,15 @@ namespace AllCourses.Controllers
         }
 
         [Authorize(Roles = "teacher")]
-        public async Task<IActionResult> Teaching(string name)
+        public async Task<IActionResult> Teaching(string userName)
         {
+            var courses = await _context.Courses.ToListAsync();
 
-            return View();
+            var myCourses = courses
+                .Where(f => f.Author == userName)
+                .ToList();
+
+            return View(myCourses);
         }
     }
 }

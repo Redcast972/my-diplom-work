@@ -24,20 +24,20 @@ namespace AllCourses.Domain.Entites.Courses
         public string CourseCategory { get; set; }
         public DateTime CreatedAt { get; set; }
         public byte[] ImageData { get; set; }
-        public List<LessonEntity> Lessons { get; set; }
-        public List<MessageEntity> Commentaries { get; set; }
-        public List<TestEntity> Tests { get; set; }
-        public List<Guid> Students { get; set; }
+        public List<string>? LessonsId { get; set; }
+        public List<string>? CommentariesId { get; set; }
+        public List<string>? TestsId { get; set; }
+        public List<string>? StudentsId { get; set; }
     }
 
     public class LessonEntity
     {
         public Guid Id { get; set; }
-        public Guid CourseId { get; set; }
+        public string CourseId { get; set; }
         public string Title { get; set; }
         public string Discription { get; set; }
         public byte[] ImageData { get; set; }
-        public string[] LinksToVideoTutorials { get; set; }
+        public List<string>? LinksToVideoTutorials { get; set; }
     }
 
     public class TestEntity

@@ -22,7 +22,7 @@ namespace AllCourses.Domain.Repositories.EntityFramevork
         }
 
         // Получить сообщение по идентификатору
-        public async Task<MessageEntity> GetMessageByIdAsync(Guid id)
+        public async Task<MessageEntity> GetMessageByIdAsync(string id)
         {
             return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
         }
@@ -34,7 +34,7 @@ namespace AllCourses.Domain.Repositories.EntityFramevork
         }
 
         // Получить сообщения по пользователю
-        public async Task<IEnumerable<MessageEntity>> GetMessagesByUserIdAsync(Guid userId)
+        public async Task<IEnumerable<MessageEntity>> GetMessagesByUserIdAsync(string userId)
         {
             return await _context.Messages
                 .Where(m => m.UserId == userId)
@@ -52,7 +52,7 @@ namespace AllCourses.Domain.Repositories.EntityFramevork
         }
 
         // Удалить сообщение по идентификатору
-        public async Task DeleteMessageAsync(Guid id)
+        public async Task DeleteMessageAsync(string id)
         {
             var message = await GetMessageByIdAsync(id);
             if (message == null)

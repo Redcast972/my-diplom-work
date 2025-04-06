@@ -1,5 +1,5 @@
-﻿@using AllCourses.Models.Courses
-@model List<CourseViewModel>
+﻿@using AllCourses.Domain.Entites.Courses
+@model List<CourseEntity>
 @{
     ViewData["Title"] = "Курсы";
     Layout = "_Layout";
@@ -53,7 +53,7 @@
                     <div class="mt-4">
                         <h2 class="text-xl font-semibold text-gray-800 truncate">@news.Title</h2>
                         <p class="text-sm text-gray-500 mt-2">@news.CreatedAt.ToString("dd.MM.yyyy")</p>
-                        <p class="text-sm text-gray-500 mt-2">@news.CourseCategoryType</p>                        
+                        <p class="text-sm text-gray-500 mt-2">@news.CourseCategory</p>                        
                         <p class="text-sm text-gray-500 mt-2">@news.Author</p>
                     </div>
                 </a>
