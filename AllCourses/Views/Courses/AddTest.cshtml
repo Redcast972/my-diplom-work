@@ -1,5 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using AllCourses.Domain.Entites.Courses
+@model TestEntity
 @{
+    ViewData["Title"] = "Создание теста";
+    Layout = "_Layout";
 }
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-3xl font-bold text-600 mb-6">Создание теста</h1>
+    <form action="/courses/addtest" method="post" enctype="multipart/form-data" class="space-y-6 bg-white p-8 rounded-lg shadow-md">
+        <div>
+            <label asp-for="Question" class="block text-xl font-medium text-gray-700">Вопрос</label>
+            <input asp-for="Question" type="text" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required />
+            <span class="text-red-600" asp-validation-for="Question"></span>
+        </div>
+
+        <div>
+            <label asp-for="Answer1" class="block text-xl font-medium text-gray-700">Ответ 1</label>
+            <textarea asp-for="Answer1" rows="6" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+            <span class="text-red-600" asp-validation-for="Answer1"></span>
+        </div>
+
+        <div>
+            <label asp-for="Answer2" class="block text-xl font-medium text-gray-700">Ответ 2</label>
+            <textarea asp-for="Answer2" rows="6" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+            <span class="text-red-600" asp-validation-for="Answer2"></span>
+        </div>
+
+        <div>
+            <label asp-for="Answer3" class="block text-xl font-medium text-gray-700">Ответ 3</label>
+            <textarea asp-for="Answer3" rows="6" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+            <span class="text-red-600" asp-validation-for="Answer3"></span>
+        </div>
+
+        <div>
+            <label asp-for="CorrectAnswerNumber" class="block text-xl font-medium text-gray-700">Номер правильного ответа</label>
+            <select asp-for="CorrectAnswerNumber" 
+                    class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-indigo-500">
+                <option value="" disabled selected>Выберите номер ответа</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+
+        <div class="flex justify-between">
+            <a href="/details" class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md">
+                Отменить
+            </a>
+            <button type="submit" class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md">
+                Далее
+            </button>
+        </div>
+    </form>
+</div>

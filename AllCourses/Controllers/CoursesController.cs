@@ -105,17 +105,31 @@ namespace AllCourses.Controllers
 
         
         [Authorize(Roles = "teacher")]
+        [Route("[controller]/Details/{id}/addtest")]
         public async Task<IActionResult> AddTest()
         {
-            //TODO Сделать добавление тестов
             return View();
         }
 
         [HttpPost]
         [Authorize(Roles = "teacher")]
-        public async Task<IActionResult> AddTest(TestEntity test)
+        [Route("[controller]/Details/{id}/addtest")]
+        public async Task<IActionResult> AddTest(TestEntity testFromForm)
         {
             //TODO Сделать добавление тестов
+            var test = new TestEntity()
+            {
+                Id = Guid.NewGuid(),
+                //CourseId = Вот сюда нужно впихнуть айдишник курса в который будем добавлять тест,
+                Question = testFromForm.Question,
+                Answer1 = testFromForm.Answer1,
+                Answer2 = testFromForm.Answer2,
+                Answer3 = testFromForm.Answer3,
+                CorrectAnswerNumber = testFromForm.CorrectAnswerNumber
+            };
+
+            await _context.Tests.AddAsync(test);
+            await _context.SaveChangesAsync();
             return View();
         }
 

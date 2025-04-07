@@ -39,7 +39,8 @@
         <h2 class="text-2xl font-bold text-gray-600 mb-6">Уроки</h2>
         @if (Model.LessonsId.Count == 0)
         {
-            <a href="/courses/addlesson" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
+            //TODO: Придумать как сюда впихнуть айдишник курса
+            <a href="/courses/Details/{id}/addlesson" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
                 Добавить урок
             </a>
         }
@@ -49,7 +50,8 @@
         <h2 class="text-2xl font-bold text-gray-600 mb-6">Тесты</h2>
         @if (Model.LessonsId.Count == 0)
         {
-            <a href="/courses/addtest" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
+            //TODO: Придумать как сюда впихнуть айдишник курса
+            <a href="/courses/Details/{id}/addtest" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
                 Добавить тест
             </a>
         }
