@@ -1,17 +1,14 @@
-﻿@* @using AllCourses.Domain.Repositories.Abstract
-@using AllCourses.Models.Courses
+﻿@using AllCourses.Models.Courses;
+@model AddLesonViewModel;
 @{
     ViewData["Title"] = "Создание урока";
     Layout = "_Layout";
 }
-@model CreateCourseViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@inject ICourseCategoryTypeRepository CategoryService
-
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <h1 class="text-3xl font-bold text-600 mb-6">Создание курса</h1>
-    <form action="/courses/addlesson" method="post" enctype="multipart/form-data" class="space-y-6 bg-white p-8 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-600 mb-6">Создание урока</h1>
+    <form action="/Courses/Details/@ViewBag.CourseId/addlesson" method="post" enctype="multipart/form-data" class="space-y-6 bg-white p-8 rounded-lg shadow-md">
         <div>
             <label asp-for="Title" class="block text-xl font-medium text-gray-700">Название урока</label>
             <input asp-for="Title" type="text" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required />
@@ -19,27 +16,15 @@
         </div>
 
         <div>
-            <label asp-for="Discription" class="block text-xl font-medium text-gray-700">Описание курса</label>
+            <label asp-for="Discription" class="block text-xl font-medium text-gray-700">Описание урока</label>
             <textarea asp-for="Discription" rows="6" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
             <span class="text-red-600" asp-validation-for="Discription"></span>
         </div>
 
         <div>
-            <label asp-for="CourseCategories" class="block text-xl font-medium text-gray-700">Категория курса</label>
-            <select id="CourseCategories" name="CourseCategories"
-                    class="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-indigo-500">
-                <option value="" disabled selected>Выберите категорию</option>
-                @foreach (var category in Model.CourseCategories)
-                {
-                    <option value="@category.Value">@category.Text</option>
-                }
-            </select>
-        </div>
-
-        <div>
-            <label asp-for="LessonsCount" class="block text-xl font-medium text-gray-700">Количество уроков</label>
-            <input asp-for="LessonsCount" type="text" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required />
-            <span class="text-red-600" asp-validation-for="LessonsCount"></span>
+            <label asp-for="LinkToVideoTutorial" class="block text-xl font-medium text-gray-700">Ссылка на видео урок</label>
+            <input asp-for="LinkToVideoTutorial" type="text" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required />
+            <span class="text-red-600" asp-validation-for="LinkToVideoTutorial"></span>
         </div>
 
         <div class="flex flex-col space-y-2">
@@ -58,7 +43,7 @@
                 Отменить
             </a>
             <button type="submit" class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md">
-                Далее
+                Создать    
             </button>
         </div>
     </form>
@@ -97,5 +82,3 @@
         }
     }
 </script>
-
- *@

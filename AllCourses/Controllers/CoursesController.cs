@@ -36,6 +36,7 @@ namespace AllCourses.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
+            ViewBag.CourseId = id;
             return View(course);
         }
 
@@ -89,38 +90,57 @@ namespace AllCourses.Controllers
         }
 
         [Authorize(Roles = "teacher")]
-        public async Task<IActionResult> AddLesson()
+        [Route("[controller]/Details/{id}/addlesson")]
+        public async Task<IActionResult> AddLesson(Guid id)
         {
-            //TODO Сделать добавление уроков
+            ViewBag.CourseId = id;
             return View();
         }
 
         [HttpPost]
         [Authorize(Roles = "teacher")]
-        public async Task<IActionResult> AddLesson(LessonEntity lesson)
+        [Route("[controller]/Details/{id}/addlesson")]
+        public async Task<IActionResult> AddLesson(Guid id, [FromForm] AddLesonViewModel lesson)
         {
-            //TODO Сделать добавление уроков
-            return View();
+            using var memoryStream = new MemoryStream();
+            await lesson.ImageFile.CopyToAsync(memoryStream);
+            var imageBytes = memoryStream.ToArray();
+
+            var lessonEntity = new LessonEntity()
+            {
+                Id = Guid.NewGuid(),
+                CourseId = id.ToString(),
+                Title = lesson.Title,
+                Discription = lesson.Discription,
+                LinksToVideoTutorials = new List<string>() { lesson.LinkToVideoTutorial },
+                ImageData = imageBytes
+            };
+
+            _context.Lessons.Add(lessonEntity);
+            await _context.SaveChangesAsync();
+
+            //TODO: Перенастроить редирект на страницу преподавание и внихнуть юзернейм чтобы он коректно перенес
+            return RedirectToAction("");
         }
 
         
         [Authorize(Roles = "teacher")]
         [Route("[controller]/Details/{id}/addtest")]
-        public async Task<IActionResult> AddTest()
+        public async Task<IActionResult> AddTest(Guid id)
         {
+            ViewBag.CourseId = id;
             return View();
         }
 
         [HttpPost]
         [Authorize(Roles = "teacher")]
         [Route("[controller]/Details/{id}/addtest")]
-        public async Task<IActionResult> AddTest(TestEntity testFromForm)
-        {
-            //TODO Сделать добавление тестов
+        public async Task<IActionResult> AddTest(Guid id, [FromForm] TestEntity testFromForm)
+        {            
             var test = new TestEntity()
             {
                 Id = Guid.NewGuid(),
-                //CourseId = Вот сюда нужно впихнуть айдишник курса в который будем добавлять тест,
+                CourseId = id,
                 Question = testFromForm.Question,
                 Answer1 = testFromForm.Answer1,
                 Answer2 = testFromForm.Answer2,
@@ -128,10 +148,34 @@ namespace AllCourses.Controllers
                 CorrectAnswerNumber = testFromForm.CorrectAnswerNumber
             };
 
+            var course = await _context.Courses.FindAsync(id);
+
+            course.TestsId.Add(test.Id.ToString());
+
             await _context.Tests.AddAsync(test);
             await _context.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = id });
+        }
+
+        [Authorize(Roles = "teacher")]
+        [Route("[controller]/Details/{courseId}/test/{testId}/view")]
+        public async Task<IActionResult> ViewTest(Guid courseId, Guid testId)
+        {
+            //TODO:Реализовать просмотр теста
+            //ViewBag.CourseId = id;
             return View();
         }
+
+        [Authorize(Roles = "teacher")]
+        [Route("[controller]/Details/{courseId}/test/{testId}/edit")]
+        public async Task<IActionResult> EditTest(Guid courseId, Guid testId)
+        {
+            //TODO:Реализовать редактирование теста
+            //ViewBag.CourseId = id;
+            return View();
+        }
+
+
 
         [Authorize(Roles = "student")]
         [Route("[controller]/get-access-to-create-courses")]
