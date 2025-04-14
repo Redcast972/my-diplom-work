@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AllCourses.Controllers
 {
@@ -28,8 +29,18 @@ namespace AllCourses.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
+            var courses = await _context.Courses.ToListAsync();
+
+            return View(courses);
+        }
+
+        public async Task<IActionResult> DetailsOnlyForViewOrSubscribe(Guid id)
+        {
+
+            var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
+            ViewBag.CourseId = id;
             return View();
         }
 
@@ -38,6 +49,39 @@ namespace AllCourses.Controllers
             var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
             ViewBag.CourseId = id;
             return View(course);
+        }
+
+        [Authorize]
+        [Route("[controller]/Details/{id}/subscribe")]
+        public async Task<IActionResult> Subscribe(Guid id)
+        {
+            //TODO: Добавить подписку на курс
+            var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
+            IdentityUser user = await userManager.FindByNameAsync(User.Identity.Name);
+            course.StudentsId.Add(user.Id);
+
+            var usercourses = await _context.UsersCourses.FirstOrDefaultAsync(m => m.Username == user.UserName);
+            var courseId = course.Id.ToString();
+
+            if (usercourses.CoursesId.Count == 0)
+            {
+                var coursesId = new List<string>();
+                coursesId.Add(courseId);
+                var userCourseEntityIfCourses0 = new UserCoursesEntity()
+                {
+                    UserId = Guid.Parse(user.Id),
+                    Username = user.UserName,
+                    CoursesId = coursesId,
+                };
+            }
+            else
+            {
+                usercourses.CoursesId.Add(courseId);
+            }
+            
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "teacher")]
@@ -115,6 +159,10 @@ namespace AllCourses.Controllers
                 LinksToVideoTutorials = new List<string>() { lesson.LinkToVideoTutorial },
                 ImageData = imageBytes
             };
+
+            var course = await _context.Courses.FindAsync(id);
+
+            course.LessonsId.Add(lessonEntity.Id.ToString());
 
             _context.Lessons.Add(lessonEntity);
             await _context.SaveChangesAsync();

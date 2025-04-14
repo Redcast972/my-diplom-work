@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     /// <inheritdoc />
-    public partial class IniteilCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -185,6 +185,19 @@ namespace AllCourses.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UsersCourses",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Username = table.Column<string>(type: "text", nullable: false),
+                    CoursesId = table.Column<List<string>>(type: "text[]", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersCourses", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -306,8 +319,8 @@ namespace AllCourses.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "d841fce8-f549-4fec-99d3-d7be8d0a7331", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEEMx5KKVJk3Zfss87FcHzb6ELiR+TuLYStiOHSxghY08vxLXV1uN1y/kH4acyl5HyA==", null, false, "d3dac2cd-c604-4c5b-948c-077fd9d54deb", false, "admin" },
-                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "f85d7d79-5481-4257-bd5d-d9809fb8cd6a", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEBTpxtXbqr6EtcjlHyltFVm+zMMxkIJlgbGxdHwHngfWQsVPEReTCPRJa0HBhj5S7w==", null, false, "d913fc7d-977f-4f9a-bc70-d069fc30544c", false, "moderator" }
+                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "532d1aea-31a7-47bf-9649-3290808def33", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAELmRhhsMpzauKMVnklEct/J11WrnOYKvRh5egW1awHUxWz6YKTr2EXEsgoLV5D1N0A==", null, false, "5165b2a2-0d17-49f7-a8c8-84805499a53f", false, "admin" },
+                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "67d611b9-3c6a-4802-bfc7-a0bade3c6f85", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEBiQXiCeqmjfi4BEHfBhULese5AGBk9yxNyo6t0QwOGi2ccM3VPoBqfhZaEbJQPWtg==", null, false, "a2bdc2c8-c703-4d77-8c3e-1f0712203305", false, "moderator" }
                 });
 
             migrationBuilder.InsertData(
@@ -398,6 +411,9 @@ namespace AllCourses.Migrations
 
             migrationBuilder.DropTable(
                 name: "UsersAvatars");
+
+            migrationBuilder.DropTable(
+                name: "UsersCourses");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

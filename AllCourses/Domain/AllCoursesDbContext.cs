@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 
 namespace AllCourses.Domain
 {
@@ -19,12 +20,14 @@ namespace AllCourses.Domain
         public DbSet<ApplicationForTeachingEntity> ApplicationsForTeaching { get; set; }
         public DbSet<CourseEntity> Courses { get; set; }
         public DbSet<LessonEntity> Lessons { get; set; }
-        public DbSet<TestEntity> Tests { get; set; }    
+        public DbSet<TestEntity> Tests { get; set; }   
+        public DbSet<UserCoursesEntity> UsersCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<UserCoursesEntity>().HasKey(u => u.UserId);
             builder.Entity<IdentityRole>().HasData(GetPredefinedRoles());
             builder.Entity<IdentityUser>().HasData(GetPredefinedUsers());
             builder.Entity<IdentityUserRole<string>>().HasData(GetUserRoles());

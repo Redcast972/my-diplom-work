@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     [DbContext(typeof(AllCoursesDbContext))]
-    [Migration("20250405163904_IniteilCreate")]
-    partial class IniteilCreate
+    [Migration("20250414121328_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,6 +184,25 @@ namespace AllCourses.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tests");
+                });
+
+            modelBuilder.Entity("AllCourses.Domain.Entites.Courses.UserCoursesEntity", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<List<string>>("CoursesId")
+                        .IsRequired()
+                        .HasColumnType("text[]");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("UsersCourses");
                 });
 
             modelBuilder.Entity("AllCourses.Domain.Entites.MessageEntity", b =>
@@ -419,15 +438,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "6c0eff69-b00a-49ba-b093-2e9e974828f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d841fce8-f549-4fec-99d3-d7be8d0a7331",
+                            ConcurrencyStamp = "532d1aea-31a7-47bf-9649-3290808def33",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEMx5KKVJk3Zfss87FcHzb6ELiR+TuLYStiOHSxghY08vxLXV1uN1y/kH4acyl5HyA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmRhhsMpzauKMVnklEct/J11WrnOYKvRh5egW1awHUxWz6YKTr2EXEsgoLV5D1N0A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d3dac2cd-c604-4c5b-948c-077fd9d54deb",
+                            SecurityStamp = "5165b2a2-0d17-49f7-a8c8-84805499a53f",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -435,15 +454,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "ef26d68c-2299-407b-a953-a8a63dda5f5c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f85d7d79-5481-4257-bd5d-d9809fb8cd6a",
+                            ConcurrencyStamp = "67d611b9-3c6a-4802-bfc7-a0bade3c6f85",
                             Email = "moderator@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MODERATOR@GMAIL.COM",
                             NormalizedUserName = "MODERATOR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBTpxtXbqr6EtcjlHyltFVm+zMMxkIJlgbGxdHwHngfWQsVPEReTCPRJa0HBhj5S7w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBiQXiCeqmjfi4BEHfBhULese5AGBk9yxNyo6t0QwOGi2ccM3VPoBqfhZaEbJQPWtg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d913fc7d-977f-4f9a-bc70-d069fc30544c",
+                            SecurityStamp = "a2bdc2c8-c703-4d77-8c3e-1f0712203305",
                             TwoFactorEnabled = false,
                             UserName = "moderator"
                         });
