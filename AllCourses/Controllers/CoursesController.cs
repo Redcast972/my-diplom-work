@@ -41,7 +41,7 @@ namespace AllCourses.Controllers
 
             var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
             ViewBag.CourseId = id;
-            return View();
+            return View(course);
         }
 
         public async Task<IActionResult> Details(Guid id)
@@ -416,6 +416,12 @@ namespace AllCourses.Controllers
                 .ToList();
 
             return View(myCourses);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyCourses(string userName)
+        {
+            return View();
         }
     }
 }
