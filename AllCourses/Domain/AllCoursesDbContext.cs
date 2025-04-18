@@ -1,6 +1,7 @@
 ﻿using AllCourses.Domain.Entites;
 using AllCourses.Domain.Entites.ApplicationsForTeaching;
 using AllCourses.Domain.Entites.Courses;
+using AllCourses.Domain.Entites.Forum;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace AllCourses.Domain
         public DbSet<LessonEntity> Lessons { get; set; }
         public DbSet<TestEntity> Tests { get; set; }   
         public DbSet<UserCoursesEntity> UsersCourses { get; set; }
+        public DbSet<DiscussionEntity> Discussions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,0 +1,79 @@
+﻿@using AllCourses.Domain.Repositories.Abstract
+@using AllCourses.Models.Courses
+@{
+    ViewData["Title"] = "Создание дискуссии";
+    Layout = "_Layout";
+}
+@model CreateCourseViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="text-3xl font-bold text-600 mb-6">Создание дискуссии</h1>
+    <form action="/forum/create-discussion" method="post" enctype="multipart/form-data" class="space-y-6 bg-white p-8 rounded-lg shadow-md">
+        <div>
+            <label asp-for="Title" class="block text-xl font-medium text-gray-700">Название дискусии</label>
+            <input asp-for="Title" type="text" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required />
+            <span class="text-red-600" asp-validation-for="Title"></span>
+        </div>
+
+        <div>
+            <label asp-for="Discription" class="block text-xl font-medium text-gray-700">Описание дискусии</label>
+            <textarea asp-for="Discription" rows="6" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+            <span class="text-red-600" asp-validation-for="Discription"></span>
+        </div>
+
+        <div class="flex flex-col space-y-2">
+            <label for="image" class="block text-xl font-medium text-gray-700">Прикрепить фотографию</label>
+            <label for="image" class="cursor-pointer px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md w-auto text-center">
+                Выбрать изображение
+                <input asp-for="ImageFile" type="file" id="image" class="hidden" onchange="updateFileName()" />
+            </label>
+            <p id="file-name" class="text-sm text-gray-500 mt-2"></p>
+            <span class="text-red-600" asp-validation-for="ImageFile"></span>
+
+        </div>
+
+        <div class="flex justify-between">
+            <a href="/forum" class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md">
+                Отменить
+            </a>
+            <button type="submit" class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-md">
+                Далее
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    function updateFileName() {
+        const fileInput = document.getElementById('image');
+        const fileName = document.getElementById('file-name');
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+
+            img.onload = function () {
+                // Проверка на минимальные размеры
+                if (img.width < 800 || img.height < 600) {
+                    alert("Разрешение изображения должно быть не менее 800x600 пикселей.");
+                    fileInput.value = "";
+                    fileName.textContent = "";
+                }
+                // Проверка на соотношение сторон 16:9
+                else if (img.width / img.height !== 16 / 9) {
+                    alert("Соотношение сторон изображения должно быть 16:9.");
+                    fileInput.value = "";
+                    fileName.textContent = "";
+                } else {
+                    fileName.textContent = `Выбран файл: ${file.name}`;
+                }
+                URL.revokeObjectURL(img.src);
+            };
+        } else {
+            fileName.textContent = '';
+        }
+    }
+</script>

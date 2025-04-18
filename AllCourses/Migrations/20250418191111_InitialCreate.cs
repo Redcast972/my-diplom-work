@@ -319,8 +319,8 @@ namespace AllCourses.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "532d1aea-31a7-47bf-9649-3290808def33", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAELmRhhsMpzauKMVnklEct/J11WrnOYKvRh5egW1awHUxWz6YKTr2EXEsgoLV5D1N0A==", null, false, "5165b2a2-0d17-49f7-a8c8-84805499a53f", false, "admin" },
-                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "67d611b9-3c6a-4802-bfc7-a0bade3c6f85", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEBiQXiCeqmjfi4BEHfBhULese5AGBk9yxNyo6t0QwOGi2ccM3VPoBqfhZaEbJQPWtg==", null, false, "a2bdc2c8-c703-4d77-8c3e-1f0712203305", false, "moderator" }
+                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "0d93bb6e-9a32-4ed8-966b-5e1d82ca9b80", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEL34V+61SJt5VGEO+MyejJ1W8onli5LCnEJSjOVlvg336E4YUrf86d3Syc6A/bN/OQ==", null, false, "dbabd5ba-8ae1-45af-82ac-fd69a68e585b", false, "admin" },
+                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "ac71e619-8baa-4b95-81e4-25cd4f3ddf4d", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEMipULp7XFXqxTWsMr3d6SvipvrEPKAdwniQ8Ykm9FHlbdFKH9vRqZzzSgXEdpE46A==", null, false, "49a36a24-648f-4031-82af-1ace23d719dd", false, "moderator" }
                 });
 
             migrationBuilder.InsertData(

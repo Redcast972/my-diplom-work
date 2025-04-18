@@ -435,15 +435,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "6c0eff69-b00a-49ba-b093-2e9e974828f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "532d1aea-31a7-47bf-9649-3290808def33",
+                            ConcurrencyStamp = "0d93bb6e-9a32-4ed8-966b-5e1d82ca9b80",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELmRhhsMpzauKMVnklEct/J11WrnOYKvRh5egW1awHUxWz6YKTr2EXEsgoLV5D1N0A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL34V+61SJt5VGEO+MyejJ1W8onli5LCnEJSjOVlvg336E4YUrf86d3Syc6A/bN/OQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5165b2a2-0d17-49f7-a8c8-84805499a53f",
+                            SecurityStamp = "dbabd5ba-8ae1-45af-82ac-fd69a68e585b",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -451,15 +451,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "ef26d68c-2299-407b-a953-a8a63dda5f5c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "67d611b9-3c6a-4802-bfc7-a0bade3c6f85",
+                            ConcurrencyStamp = "ac71e619-8baa-4b95-81e4-25cd4f3ddf4d",
                             Email = "moderator@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MODERATOR@GMAIL.COM",
                             NormalizedUserName = "MODERATOR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBiQXiCeqmjfi4BEHfBhULese5AGBk9yxNyo6t0QwOGi2ccM3VPoBqfhZaEbJQPWtg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMipULp7XFXqxTWsMr3d6SvipvrEPKAdwniQ8Ykm9FHlbdFKH9vRqZzzSgXEdpE46A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a2bdc2c8-c703-4d77-8c3e-1f0712203305",
+                            SecurityStamp = "49a36a24-648f-4031-82af-1ace23d719dd",
                             TwoFactorEnabled = false,
                             UserName = "moderator"
                         });
