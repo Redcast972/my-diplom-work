@@ -46,6 +46,10 @@ namespace AllCourses.Controllers
                     }
                     ModelState.AddModelError(nameof(LoginViewModel.UserName), "Неправильный логин или пароль");
                 }
+                else
+                {
+                    ModelState.AddModelError(nameof(LoginViewModel.UserName), "Пользователь не зарегестрирован в системе");
+                }
             }
             return View(model);
         }

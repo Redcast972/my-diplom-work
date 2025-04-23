@@ -52,10 +52,9 @@ namespace AllCourses.Controllers
         }
 
         [Authorize]
-        [Route("[controller]/Details/{id}/subscribe")]
+        [Route("[controller]/DetailsOnlyForViewOrSubscribe/{id}/subscribe")]
         public async Task<IActionResult> Subscribe(Guid id)
         {
-            //TODO: Добавить подписку на курс
             var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
             IdentityUser user = await userManager.FindByNameAsync(User.Identity.Name);
             course.StudentsId.Add(user.Id);
@@ -63,7 +62,7 @@ namespace AllCourses.Controllers
             var usercourses = await _context.UsersCourses.FirstOrDefaultAsync(m => m.Username == user.UserName);
             var courseId = course.Id.ToString();
 
-            if (usercourses.CoursesId.Count == 0)
+            if (usercourses == null || usercourses.CoursesId.Count == 0)
             {
                 var coursesId = new List<string>();
                 coursesId.Add(courseId);
@@ -73,6 +72,8 @@ namespace AllCourses.Controllers
                     Username = user.UserName,
                     CoursesId = coursesId,
                 };
+
+                await _context.UsersCourses.AddAsync(userCourseEntityIfCourses0);
             }
             else
             {
@@ -81,7 +82,7 @@ namespace AllCourses.Controllers
             
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return Redirect($" ");
         }
 
         [Authorize(Roles = "teacher")]
@@ -421,7 +422,22 @@ namespace AllCourses.Controllers
         [Authorize]
         public async Task<IActionResult> MyCourses(string userName)
         {
-            return View();
+            var useresCourses = await _context.UsersCourses.ToListAsync();
+
+            var myCoursesId = useresCourses
+                .Where(f => f.Username == userName)
+                .Select(f => f.CoursesId)
+                .First();
+
+            var myCourses = new List<CourseEntity>();
+
+            foreach (var id in myCoursesId)
+            {
+                var course = await _context.Courses.Where(x => x.Id == Guid.Parse(id)).FirstOrDefaultAsync();
+                myCourses.Add(course);
+            }
+
+            return View(myCourses);
         }
     }
 }

@@ -1,8 +1,14 @@
 ﻿@using AllCourses.Domain.Entites.Courses
+@using Microsoft.AspNetCore.Identity
 @model CourseEntity
 @{
     Layout = "_Layout";
     ViewData["Title"] = Model.Title;
+}
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var userId = UserManager.GetUserId(User); // Получает ID пользователя (string)
 }
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -34,9 +40,19 @@
                 </div>
 
                 <div class="mt-8">
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-md transition-all font-medium">
-                        Записаться на курс
-                    </button>
+                    @if (Model.StudentsId.Contains(userId))
+                    {
+                        <a href="@Model.Id/unsubscribe" class="bg-indigo-300 text-indigo-800 px-6 py-3 rounded-lg shadow font-medium inline-block cursor-default">
+                            Вы подписаны
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Model.Id/subscribe" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-md transition-all font-medium inline-block">
+                            Записаться на курс
+                        </a>
+                    }
+                    
                 </div>
             </div>
 

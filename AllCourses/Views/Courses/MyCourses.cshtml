@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using AllCourses.Domain.Entites.Courses
+@model List<CourseEntity>
 @{
+    ViewData["Title"] = "Мои курсы";
+    Layout = "_Layout";
 }
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- Верхний блок с заголовком и кнопкой -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-600">Мои курсы</h1>
+    </div>
+
+    <!-- Сетка карточек новостей -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Две карточки в ряд начиная с sm -->
+        @if (Model == null)
+        {
+            <h2>Тут пока ничего нет</h2>
+        }
+        @if (Model != null)
+        {
+            foreach (var news in Model)
+            {
+                <a href="@Url.Action("Details", "Courses", new { id = news.Id })" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                    <div class="relative">
+                        @if (news.ImageData != null)
+                        {
+                            <img src="data:image/png;base64,@Convert.ToBase64String(news.ImageData)" alt="Картинка курса" class="rounded-lg shadow-md w-full h-full object-cover" />
+                        }
+                        else
+                        {
+                            <p class="text-gray-500 mt-2">Нет изображения</p>
+                        }
+                    </div>
+                    <div class="mt-4">
+                        <h2 class="text-xl font-semibold text-gray-800 truncate">@news.Title</h2>
+                        <p class="text-sm text-gray-500 mt-2">@news.CourseCategory</p>
+                        <p class="text-sm text-gray-500 mt-2">@news.Author</p>
+                    </div>
+                </a>
+            }
+        }
+    </div>
+</div>
