@@ -46,9 +46,55 @@ namespace AllCourses.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
+            List<LessonModel> lessonModels = new List<LessonModel>();
+            List<TestModel> testModels = new List<TestModel>();
+
             var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
+            foreach (var lessonId in course.LessonsId)
+            {
+                var lesson = await _context.Lessons.FirstOrDefaultAsync(m => m.Id == Guid.Parse(lessonId));
+                var lessonModel = new LessonModel()
+                {
+                    Id = lesson.Id,
+                    CourseId = lesson.CourseId,
+                    Title = lesson.Title,
+                    Discription = lesson.Discription,
+                    ImageData = lesson.ImageData,
+                    LinksToVideoTutorials = lesson.LinksToVideoTutorials
+                };
+                lessonModels.Add(lessonModel);
+            }
+
+            foreach (var testId in course.TestsId)
+            {
+                var test = await _context.Tests.FirstOrDefaultAsync(m => m.Id == Guid.Parse(testId));
+                var testModel = new TestModel()
+                {
+                    Id = test.Id,
+                    CourseId = test.CourseId,
+                    Question = test.Question,
+                    Answer1 = test.Answer1,
+                    Answer2 = test.Answer2,
+                    Answer3 = test.Answer3,
+                    CorrectAnswerNumber = test.CorrectAnswerNumber
+                };
+                testModels.Add(testModel);
+            }
+
+            var courseModel = new CourseViewModel()
+            {
+                Id = course.Id,
+                Author = course.Author,
+                Title = course.Title,
+                Discription = course.Discription,
+                ImageData = course.ImageData,
+                CourseCategoryType = course.CourseCategory,
+                lessons = lessonModels,
+                tests = testModels
+            };
+
             ViewBag.CourseId = id;
-            return View(course);
+            return View(courseModel);
         }
 
         [Authorize]

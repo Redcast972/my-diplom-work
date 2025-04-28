@@ -1,5 +1,5 @@
-﻿@using AllCourses.Domain.Entites.Courses
-@model CourseEntity
+﻿@using AllCourses.Models.Courses
+@model CourseViewModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = Model.Title;
@@ -40,7 +40,7 @@
                 Добавить урок
             </a>
         </div>
-        @if (Model.LessonsId != null && Model.LessonsId.Count > 0)
+        @if (Model.lessons != null && Model.lessons.Count > 0)
         {
             <div class="overflow-x-auto">
                 <table class="w-full border-collapse text-sm text-gray-700">
@@ -54,12 +54,12 @@
                 </thead>
                 <tbody>
                     
-                    @foreach (var lesson in Model.LessonsId)
+                    @foreach (var lesson in Model.lessons)
                     {
                         <tr class="border-b hover:bg-gray-50">
                             <td class="p-4"><a href="/courses/Details/@ViewBag.CourseId/lesson/@lesson/view" class="text-blue-600">Открыть</a></td>
-                            <td class="p-4">@lesson</td>
-                            <td class="p-4">@lesson</td>
+                            <td class="p-4">@lesson.Id</td>
+                            <td class="p-4">@lesson.Title</td>
                             
                         </tr>
                         <tr>
@@ -83,7 +83,7 @@
             </a>
         </div>
 
-        @if (Model.TestsId != null && Model.TestsId.Count > 0)
+        @if (Model.tests != null && Model.tests.Count > 0)
         {
             <div class="overflow-x-auto">
                 <table class="w-full border-collapse text-sm text-gray-700">
@@ -97,12 +97,12 @@
                 </thead>
                 <tbody>
                     
-                    @foreach (var test in Model.TestsId)
+                    @foreach (var test in Model.tests)
                     {
                         <tr class="border-b hover:bg-gray-50">
                             <td class="p-4"><a href="/courses/Details/@ViewBag.CourseId/test/@test/view" class="text-blue-600">Открыть</a></td>
-                            <td class="p-4">@test</td>
-                            <td class="p-4">@test</td>
+                            <td class="p-4">@test.Id</td>
+                            <td class="p-4">@test.Question</td>
                             
                         </tr>
                         <tr>
