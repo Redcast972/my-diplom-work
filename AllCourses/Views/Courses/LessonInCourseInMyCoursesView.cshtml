@@ -1,5 +1,5 @@
 ﻿@using AllCourses.Models.Courses
-@model LessonViewModel
+@model LessonModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = Model.Title;
@@ -19,7 +19,7 @@
 
     <div class="bg-white p-6 rounded-lg shadow-md">
         <div class="relative">
-            @if (Model. != null)
+            @if (Model.ImageData != null)
             {
                 <img src="data:image/png;base64,@Convert.ToBase64String(Model.ImageData)" alt="Новость" class="rounded-lg shadow-md w-full h-full object-cover" />
             }

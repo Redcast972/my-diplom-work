@@ -105,6 +105,24 @@ namespace AllCourses.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Discussions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Discription = table.Column<string>(type: "text", nullable: false),
+                    Author = table.Column<string>(type: "text", nullable: false),
+                    AuthorId = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: false),
+                    MessagesId = table.Column<List<string>>(type: "text[]", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Discussions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Lessons",
                 columns: table => new
                 {
@@ -195,6 +213,21 @@ namespace AllCourses.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsersCourses", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersProgress",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    CourseId = table.Column<string>(type: "text", nullable: false),
+                    LessonsCount = table.Column<string>(type: "text", nullable: false),
+                    lessonsСompletedCount = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersProgress", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,8 +352,9 @@ namespace AllCourses.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "0d93bb6e-9a32-4ed8-966b-5e1d82ca9b80", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEL34V+61SJt5VGEO+MyejJ1W8onli5LCnEJSjOVlvg336E4YUrf86d3Syc6A/bN/OQ==", null, false, "dbabd5ba-8ae1-45af-82ac-fd69a68e585b", false, "admin" },
-                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "ac71e619-8baa-4b95-81e4-25cd4f3ddf4d", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEMipULp7XFXqxTWsMr3d6SvipvrEPKAdwniQ8Ykm9FHlbdFKH9vRqZzzSgXEdpE46A==", null, false, "49a36a24-648f-4031-82af-1ace23d719dd", false, "moderator" }
+                    { "17c01453-0cd8-4fc8-8c39-48028912f8b7", 0, "78d4f27d-4189-4873-a751-116ef7e24401", "teacher@gmail.com", true, false, null, "TEACHER@GMAIL.COM", "TEACHER", "AQAAAAIAAYagAAAAEOsEkmEBbX7Z6blXjDmGLwuBIMbSle+3z7XLm49D26d4wxpnj9IzA/MMOYJb7chuuw==", null, false, "3d3bcd91-8acb-40a7-84dd-ee9c4971fd4b", false, "teacher" },
+                    { "6c0eff69-b00a-49ba-b093-2e9e974828f6", 0, "971be902-7894-4f56-ba3c-4b0ced9ce43c", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEHIUPchkG63/C1oMELDlI75KF45MiR4cjS0wRxdPjwCTGLRV5bgNBWcXR0MkOBlSAg==", null, false, "d60b7983-3bf5-4392-90b5-cac8a9c8e926", false, "admin" },
+                    { "ef26d68c-2299-407b-a953-a8a63dda5f5c", 0, "78ca8fc3-ee2d-411a-89f2-b55404d3f6e1", "moderator@gmail.com", true, false, null, "MODERATOR@GMAIL.COM", "MODERATOR", "AQAAAAIAAYagAAAAEMzD4B1huucB2HEvO1/2XmDsa1kClFSsDV1koCnpMDzYZSG7W2s35kqQ2mwtL5hB9A==", null, false, "460bf81a-cb7b-4332-a254-318368f83cf3", false, "moderator" }
                 });
 
             migrationBuilder.InsertData(
@@ -328,6 +362,7 @@ namespace AllCourses.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
+                    { "3", "17c01453-0cd8-4fc8-8c39-48028912f8b7" },
                     { "1", "6c0eff69-b00a-49ba-b093-2e9e974828f6" },
                     { "2", "ef26d68c-2299-407b-a953-a8a63dda5f5c" }
                 });
@@ -398,6 +433,9 @@ namespace AllCourses.Migrations
                 name: "Courses");
 
             migrationBuilder.DropTable(
+                name: "Discussions");
+
+            migrationBuilder.DropTable(
                 name: "Lessons");
 
             migrationBuilder.DropTable(
@@ -414,6 +452,9 @@ namespace AllCourses.Migrations
 
             migrationBuilder.DropTable(
                 name: "UsersCourses");
+
+            migrationBuilder.DropTable(
+                name: "UsersProgress");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

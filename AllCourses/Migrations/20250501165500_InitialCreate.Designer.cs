@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllCourses.Migrations
 {
     [DbContext(typeof(AllCoursesDbContext))]
-    [Migration("20250418191111_InitialCreate")]
+    [Migration("20250501165500_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -123,6 +123,33 @@ namespace AllCourses.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("AllCourses.Domain.Entites.Courses.CourseUserProgessEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CourseId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LessonsCount")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("lessonsСompletedCount")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UsersProgress");
+                });
+
             modelBuilder.Entity("AllCourses.Domain.Entites.Courses.LessonEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -203,6 +230,43 @@ namespace AllCourses.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("UsersCourses");
+                });
+
+            modelBuilder.Entity("AllCourses.Domain.Entites.Forum.DiscussionEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Discription")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<List<string>>("MessagesId")
+                        .HasColumnType("text[]");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Discussions");
                 });
 
             modelBuilder.Entity("AllCourses.Domain.Entites.MessageEntity", b =>
@@ -438,15 +502,15 @@ namespace AllCourses.Migrations
                         {
                             Id = "6c0eff69-b00a-49ba-b093-2e9e974828f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d93bb6e-9a32-4ed8-966b-5e1d82ca9b80",
+                            ConcurrencyStamp = "971be902-7894-4f56-ba3c-4b0ced9ce43c",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL34V+61SJt5VGEO+MyejJ1W8onli5LCnEJSjOVlvg336E4YUrf86d3Syc6A/bN/OQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHIUPchkG63/C1oMELDlI75KF45MiR4cjS0wRxdPjwCTGLRV5bgNBWcXR0MkOBlSAg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dbabd5ba-8ae1-45af-82ac-fd69a68e585b",
+                            SecurityStamp = "d60b7983-3bf5-4392-90b5-cac8a9c8e926",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -454,17 +518,33 @@ namespace AllCourses.Migrations
                         {
                             Id = "ef26d68c-2299-407b-a953-a8a63dda5f5c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ac71e619-8baa-4b95-81e4-25cd4f3ddf4d",
+                            ConcurrencyStamp = "78ca8fc3-ee2d-411a-89f2-b55404d3f6e1",
                             Email = "moderator@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MODERATOR@GMAIL.COM",
                             NormalizedUserName = "MODERATOR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMipULp7XFXqxTWsMr3d6SvipvrEPKAdwniQ8Ykm9FHlbdFKH9vRqZzzSgXEdpE46A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMzD4B1huucB2HEvO1/2XmDsa1kClFSsDV1koCnpMDzYZSG7W2s35kqQ2mwtL5hB9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "49a36a24-648f-4031-82af-1ace23d719dd",
+                            SecurityStamp = "460bf81a-cb7b-4332-a254-318368f83cf3",
                             TwoFactorEnabled = false,
                             UserName = "moderator"
+                        },
+                        new
+                        {
+                            Id = "17c01453-0cd8-4fc8-8c39-48028912f8b7",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "78d4f27d-4189-4873-a751-116ef7e24401",
+                            Email = "teacher@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TEACHER@GMAIL.COM",
+                            NormalizedUserName = "TEACHER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOsEkmEBbX7Z6blXjDmGLwuBIMbSle+3z7XLm49D26d4wxpnj9IzA/MMOYJb7chuuw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3d3bcd91-8acb-40a7-84dd-ee9c4971fd4b",
+                            TwoFactorEnabled = false,
+                            UserName = "teacher"
                         });
                 });
 
@@ -539,6 +619,11 @@ namespace AllCourses.Migrations
                         {
                             UserId = "ef26d68c-2299-407b-a953-a8a63dda5f5c",
                             RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "17c01453-0cd8-4fc8-8c39-48028912f8b7",
+                            RoleId = "3"
                         });
                 });
 
