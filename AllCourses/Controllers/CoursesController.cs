@@ -485,5 +485,62 @@ namespace AllCourses.Controllers
 
             return View(myCourses);
         }
+
+        [Authorize]
+        [Route("[controller]/MyCourses/{courseId}")]
+        public async Task<IActionResult> CourseInMyCoursesView(Guid courseId)
+        {
+            var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == courseId);
+            
+            var courseViewModel = new CourseViewModel {
+                Id = courseId,
+                Title = course.Title,
+                Discription = course.Discription,
+                ImageData = course.ImageData,
+                Author = course.Author,               
+            };
+            return View(courseViewModel);
+        }
+
+        [Authorize]
+        [Route("[controller]/MyCourses/{courseId}/{lessonId}")]
+        public async Task<IActionResult> LessonInCourseInMyCoursesView(Guid courseId, Guid lessonId)
+        {
+            var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == courseId);
+            var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.Id == lessonId);
+
+            var lessonViewModel = new LessonModel()
+            {
+                Id = lessonId,
+                Title = lesson.Title,
+                Discription = lesson.Discription,
+                ImageData = lesson.ImageData,
+                LinksToVideoTutorials = lesson.LinksToVideoTutorials,
+                CourseId = lesson.CourseId,
+            };
+
+            return View(lessonViewModel);
+        }
+
+        [Authorize]
+        [Route("[controller]/MyCourses/{courseId}/{testId}")]
+        public async Task<IActionResult> TestInCourseInMyCoursesView(Guid courseId, Guid testId)
+        {
+            var test = await _context.Tests.FirstOrDefaultAsync(t => t.Id == testId);
+
+            var testModel = new TestModel()
+            {
+                Id = test.Id,
+                CourseId = test.CourseId,
+                Question =  test.Question,
+                Answer1 = test.Answer1,
+                Answer2 = test.Answer2,
+                Answer3 = test.Answer3,
+                CorrectAnswerNumber = test.CorrectAnswerNumber
+            
+            };
+
+            return View(testModel);
+        }
     }
 }

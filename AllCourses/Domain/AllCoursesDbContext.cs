@@ -24,6 +24,7 @@ namespace AllCourses.Domain
         public DbSet<TestEntity> Tests { get; set; }   
         public DbSet<UserCoursesEntity> UsersCourses { get; set; }
         public DbSet<DiscussionEntity> Discussions { get; set; }
+        public DbSet<CourseUserProgessEntity> UsersProgress { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -60,7 +61,7 @@ namespace AllCourses.Domain
                     Email = "admin@gmail.com",
                     NormalizedEmail = "ADMIN@GMAIL.COM",
                     EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "Admin2004#"),
+                    PasswordHash = hasher.HashPassword(null, "Admin#2004"),
                     SecurityStamp = Guid.NewGuid().ToString()
                 },
                 new IdentityUser
@@ -71,7 +72,18 @@ namespace AllCourses.Domain
                     Email = "moderator@gmail.com",
                     NormalizedEmail = "MODERATOR@GMAIL.COM",
                     EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "Moderator2004#"),
+                    PasswordHash = hasher.HashPassword(null, "Moderator#2004"),
+                    SecurityStamp = Guid.NewGuid().ToString()
+                },
+                new IdentityUser
+                {
+                    Id = "17c01453-0cd8-4fc8-8c39-48028912f8b7",
+                    UserName = "teacher",
+                    NormalizedUserName = "TEACHER",
+                    Email = "teacher@gmail.com",
+                    NormalizedEmail = "TEACHER@GMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Teacher#2004"),
                     SecurityStamp = Guid.NewGuid().ToString()
                 }
             };
@@ -82,7 +94,8 @@ namespace AllCourses.Domain
             return new List<IdentityUserRole<string>>
             {
                 new IdentityUserRole<string> { RoleId = "1", UserId = "6c0eff69-b00a-49ba-b093-2e9e974828f6" },
-                new IdentityUserRole<string> { RoleId = "2", UserId = "ef26d68c-2299-407b-a953-a8a63dda5f5c" }
+                new IdentityUserRole<string> { RoleId = "2", UserId = "ef26d68c-2299-407b-a953-a8a63dda5f5c" },
+                new IdentityUserRole<string> { RoleId = "3", UserId = "17c01453-0cd8-4fc8-8c39-48028912f8b7" },
             };
         }
     }

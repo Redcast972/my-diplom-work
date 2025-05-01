@@ -20,13 +20,13 @@
         }
         @if (Model != null)
         {
-            foreach (var news in Model)
+            foreach (var course in Model)
             {
-                <a href="@Url.Action("Details", "Courses", new { id = news.Id })" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                <a href="/Courses/MyCourses/@course.Id" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
                     <div class="relative">
-                        @if (news.ImageData != null)
+                        @if (course.ImageData != null)
                         {
-                            <img src="data:image/png;base64,@Convert.ToBase64String(news.ImageData)" alt="Картинка курса" class="rounded-lg shadow-md w-full h-full object-cover" />
+                            <img src="data:image/png;base64,@Convert.ToBase64String(course.ImageData)" alt="Картинка курса" class="rounded-lg shadow-md w-full h-full object-cover" />
                         }
                         else
                         {
@@ -34,9 +34,9 @@
                         }
                     </div>
                     <div class="mt-4">
-                        <h2 class="text-xl font-semibold text-gray-800 truncate">@news.Title</h2>
-                        <p class="text-sm text-gray-500 mt-2">@news.CourseCategory</p>
-                        <p class="text-sm text-gray-500 mt-2">@news.Author</p>
+                        <h2 class="text-xl font-semibold text-gray-800 truncate">@course.Title</h2>
+                        <p class="text-sm text-gray-500 mt-2">@course.CourseCategory</p>
+                        <p class="text-sm text-gray-500 mt-2">@course.Author</p>
                     </div>
                 </a>
             }
