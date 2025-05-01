@@ -128,7 +128,7 @@ namespace AllCourses.Controllers
             
             await _context.SaveChangesAsync();
 
-            return Redirect($" ");
+            return Redirect($"/");
         }
 
         [Authorize(Roles = "teacher")]
