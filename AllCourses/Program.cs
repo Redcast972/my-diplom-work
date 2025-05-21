@@ -37,7 +37,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(ops =>
     ops.Password.RequireLowercase = true;// Пароль обязан содержать строчные буквы
     ops.Password.RequireDigit = true;// Пароль обязан содержать цифры
 
-}).AddEntityFrameworkStores<HexagonDbContext>()//Хранение данных пользователей в базе данных, связанной с AllCoursesDbContext
+}).AddEntityFrameworkStores<HexagonDbContext>()
   .AddDefaultTokenProviders();// Добавление токенов для таких вещей, как подтверждение email или восстановление пароля
 
 //подключаем контекст БД
