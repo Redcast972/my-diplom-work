@@ -1,4 +1,4 @@
-﻿namespace AllCourses.Areas.Teacher.Models
+﻿namespace Hexagon.Areas.Teacher.Models
 {
     public class CreateCourseViewModel
     {

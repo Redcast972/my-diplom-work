@@ -1,13 +1,13 @@
-﻿using AllCourses.Domain.Entites;
-using AllCourses.Domain.Repositories.Abstract;
+﻿using Hexagon.Domain.Entites;
+using Hexagon.Domain.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace AllCourses.Domain.Repositories.EntityFramevork
+namespace Hexagon.Domain.Repositories.EntityFramevork
 {
     public class EFMessageRepository : IMessageRepository
     {
-        private AllCoursesDbContext _context;
-        public EFMessageRepository(AllCoursesDbContext context)
+        private HexagonDbContext _context;
+        public EFMessageRepository(HexagonDbContext context)
         {
             _context = context;
         }

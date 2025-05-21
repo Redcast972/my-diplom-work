@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Domain.Entites.Courses
+namespace Hexagon.Domain.Entites.Courses
 {
     public class CoursePriceTypeEntity
     {

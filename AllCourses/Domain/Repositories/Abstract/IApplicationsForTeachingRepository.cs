@@ -1,6 +1,6 @@
-﻿using AllCourses.Domain.Entites.ApplicationsForTeaching;
+﻿using Hexagon.Domain.Entites.ApplicationsForTeaching;
 
-namespace AllCourses.Domain.Repositories.Abstract
+namespace Hexagon.Domain.Repositories.Abstract
 {
     public interface IApplicationsForTeachingRepository
     {

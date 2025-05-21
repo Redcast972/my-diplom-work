@@ -1,7 +1,7 @@
-using AllCourses.Domain;
-using AllCourses.Domain.Repositories.Abstract;
-using AllCourses.Domain.Repositories.EntityFramevork;
-using AllCourses.Services;
+using Hexagon.Domain;
+using Hexagon.Domain.Repositories.Abstract;
+using Hexagon.Domain.Repositories.EntityFramevork;
+using Hexagon.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,11 +37,11 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(ops =>
     ops.Password.RequireLowercase = true;// Пароль обязан содержать строчные буквы
     ops.Password.RequireDigit = true;// Пароль обязан содержать цифры
 
-}).AddEntityFrameworkStores<AllCoursesDbContext>()//Хранение данных пользователей в базе данных, связанной с AllCoursesDbContext
+}).AddEntityFrameworkStores<HexagonDbContext>()//Хранение данных пользователей в базе данных, связанной с AllCoursesDbContext
   .AddDefaultTokenProviders();// Добавление токенов для таких вещей, как подтверждение email или восстановление пароля
 
 //подключаем контекст БД
-builder.Services.AddDbContext<AllCoursesDbContext>(options =>
+builder.Services.AddDbContext<HexagonDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("dbConnection"))
 );
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Domain.Entites.ApplicationsForTeaching
+namespace Hexagon.Domain.Entites.ApplicationsForTeaching
 {
     public class ApplicationForTeachingEntity
     {

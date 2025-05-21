@@ -1,11 +1,11 @@
-﻿using AllCourses.Models;
-using AllCourses.Domain.Repositories.Abstract;
+﻿using Hexagon.Models;
+using Hexagon.Domain.Repositories.Abstract;
 using Microsoft.AspNetCore.Mvc;
-using AllCourses.Domain.Entites;
+using Hexagon.Domain.Entites;
 using Microsoft.AspNetCore.Authorization;
-using AllCourses.Models.News;
+using Hexagon.Models.News;
 
-namespace AllCourses.Controllers
+namespace Hexagon.Controllers
 {
     public class NewsController : Controller
     {

@@ -1,6 +1,6 @@
-﻿using AllCourses.Domain.Entites;
+﻿using Hexagon.Domain.Entites;
 
-namespace AllCourses.Domain.Repositories.Abstract
+namespace Hexagon.Domain.Repositories.Abstract
 {
     public interface INewsRepository
     {

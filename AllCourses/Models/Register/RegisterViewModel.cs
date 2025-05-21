@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Models.Register
+namespace Hexagon.Models.Register
 {
     public class RegisterViewModel
     {

@@ -1,0 +1,30 @@
+﻿/* tailwind.css или output.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .privacy-container {
+        @apply min-h-screen p-6 bg-slate-50 text-gray-800;
+    }
+
+    .privacy-box {
+        @apply max-w-4xl mx-auto bg-white shadow-md rounded-xl p-8 space-y-6;
+    }
+
+    .privacy-title {
+        @apply text-3xl font-bold text-gray-900;
+    }
+
+    .privacy-subtitle {
+        @apply text-xl font-semibold mt-6;
+    }
+
+    .privacy-paragraph {
+        @apply text-base leading-relaxed;
+    }
+
+    .privacy-list {
+        @apply list-disc pl-5 space-y-1;
+    }
+}

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Hexagon.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -13,11 +12,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hexagon.Migrations
 {
     [DbContext(typeof(HexagonDbContext))]
-    [Migration("20250501165500_InitialCreate")]
-    partial class InitialCreate
+    partial class HexagonDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

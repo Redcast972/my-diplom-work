@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AllCourses.Areas.Admin.Controllers
+namespace Hexagon.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class AdminController : Controller

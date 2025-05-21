@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AllCourses.Controllers
+namespace Hexagon.Controllers
 {
     public class NotificationController : Controller
     {

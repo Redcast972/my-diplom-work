@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace AllCourses.Domain.Entites
+namespace Hexagon.Domain.Entites
 {
     public class UserAvatarEntity
     {

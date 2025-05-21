@@ -1,12 +1,12 @@
-﻿using AllCourses.Domain.Repositories.Abstract;
-using AllCourses.Models.Login;
-using AllCourses.Models.Register;
+﻿using Hexagon.Domain.Repositories.Abstract;
+using Hexagon.Models.Login;
+using Hexagon.Models.Register;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace AllCourses.Controllers
+namespace Hexagon.Controllers
 {
     public class AccountController : Controller
     {

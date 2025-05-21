@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Domain.Entites
+namespace Hexagon.Domain.Entites
 {
     public class NewsEntity
     {

@@ -1,14 +1,14 @@
-﻿using AllCourses.Domain.Entites.ApplicationsForTeaching;
-using AllCourses.Domain.Entites.Courses;
-using AllCourses.Domain.Repositories.Abstract;
+﻿using Hexagon.Domain.Entites.ApplicationsForTeaching;
+using Hexagon.Domain.Entites.Courses;
+using Hexagon.Domain.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace AllCourses.Domain.Repositories.EntityFramevork
+namespace Hexagon.Domain.Repositories.EntityFramevork
 {
     public class EFApplicationsForTeachingRepository : IApplicationsForTeachingRepository
     {
-        private AllCoursesDbContext _context;
-        public EFApplicationsForTeachingRepository(AllCoursesDbContext context)
+        private HexagonDbContext _context;
+        public EFApplicationsForTeachingRepository(HexagonDbContext context)
         {
             _context = context;
         }

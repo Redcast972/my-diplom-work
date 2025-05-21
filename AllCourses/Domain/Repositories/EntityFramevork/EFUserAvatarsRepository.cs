@@ -1,14 +1,14 @@
-﻿using AllCourses.Domain.Entites;
-using AllCourses.Domain.Repositories.Abstract;
+﻿using Hexagon.Domain.Entites;
+using Hexagon.Domain.Repositories.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace AllCourses.Domain.Repositories.EntityFramevork
+namespace Hexagon.Domain.Repositories.EntityFramevork
 {
     public class EFUserAvatarsRepository : IUserAvatarsRepository
     {
-        private AllCoursesDbContext _context;
-        public EFUserAvatarsRepository(AllCoursesDbContext context)
+        private HexagonDbContext _context;
+        public EFUserAvatarsRepository(HexagonDbContext context)
         {
             _context = context;
         }

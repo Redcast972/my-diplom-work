@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AllCourses.Controllers
+namespace Hexagon.Controllers
 {
     public class ErrorController : Controller
     {

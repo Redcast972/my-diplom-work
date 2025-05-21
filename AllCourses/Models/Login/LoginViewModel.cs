@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Models.Login
+namespace Hexagon.Models.Login
 {
     public class LoginViewModel
     {

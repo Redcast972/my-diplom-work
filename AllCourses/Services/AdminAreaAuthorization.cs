@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Authorization;
 
-namespace AllCourses.Services
+namespace Hexagon.Services
 {
     public class AdminAreaAuthorization : IControllerModelConvention
     {

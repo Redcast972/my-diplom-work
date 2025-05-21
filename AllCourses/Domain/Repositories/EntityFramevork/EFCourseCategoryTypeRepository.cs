@@ -1,13 +1,13 @@
-﻿using AllCourses.Domain.Entites.Courses;
-using AllCourses.Domain.Repositories.Abstract;
+﻿using Hexagon.Domain.Entites.Courses;
+using Hexagon.Domain.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace AllCourses.Domain.Repositories.EntityFramevork
+namespace Hexagon.Domain.Repositories.EntityFramevork
 {
     public class EFCourseCategoryTypeRepository : ICourseCategoryTypeRepository
     {
-        private AllCoursesDbContext _context;
-        public EFCourseCategoryTypeRepository(AllCoursesDbContext context)
+        private HexagonDbContext _context;
+        public EFCourseCategoryTypeRepository(HexagonDbContext context)
         {
             _context = context;
         }

@@ -1,7 +1,7 @@
-﻿using AllCourses.Areas.Teacher.Models;
+﻿using Hexagon.Areas.Teacher.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AllCourses.Areas.Teacher.Controllers
+namespace Hexagon.Areas.Teacher.Controllers
 {
     public class CourseController : Controller
     {

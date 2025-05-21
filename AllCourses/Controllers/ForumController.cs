@@ -1,8 +1,8 @@
-﻿using AllCourses.Domain.Entites.Forum;
+﻿using Hexagon.Domain.Entites.Forum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AllCourses.Controllers
+namespace Hexagon.Controllers
 {
     public class ForumController : Controller
     {

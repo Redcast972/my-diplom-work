@@ -1,14 +1,14 @@
-﻿using AllCourses.Domain.Entites;
-using AllCourses.Domain.Repositories.Abstract;
+﻿using Hexagon.Domain.Entites;
+using Hexagon.Domain.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace AllCourses.Domain.Repositories.EntityFramevork
+namespace Hexagon.Domain.Repositories.EntityFramevork
 {
     public class EFNewsRepository : INewsRepository
     {
-        private AllCoursesDbContext _context;
+        private HexagonDbContext _context;
 
-        public EFNewsRepository(AllCoursesDbContext context)
+        public EFNewsRepository(HexagonDbContext context)
         {
             _context = context;    
         }

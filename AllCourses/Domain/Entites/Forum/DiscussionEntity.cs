@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Domain.Entites.Forum
+namespace Hexagon.Domain.Entites.Forum
 {
     public class DiscussionEntity
     {

@@ -1,8 +1,8 @@
-using AllCourses.Domain.Repositories.Abstract;
-using AllCourses.Models.News;
+using Hexagon.Domain.Repositories.Abstract;
+using Hexagon.Models.News;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AllCourses.Controllers
+namespace Hexagon.Controllers
 {
     public class HomeController : Controller
     {

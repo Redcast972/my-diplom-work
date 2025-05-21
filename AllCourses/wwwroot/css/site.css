@@ -1,3 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --accent-1: #6C63FF;
+  --accent-2: #4ECDC4;
+  --accent-3: #F7B733;
+  --accent-4: #FF6B6B;
+  --extra-color-1: #36D1DC;
+  --extra-color-2: #5B86E5;
+  --python-color: #FFD43B;
+  --csharp-color: #9B4F96;
+  --js-color: #F0DB4F;
+}
+
+/* Background gradient utilities */
+.bg-gradient-accent1 {
+  background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+}
+.bg-gradient-accent2 {
+  background: linear-gradient(45deg, var(--accent-3), var(--extra-color-1));
+}
+.bg-gradient-accent3 {
+  background: linear-gradient(45deg, var(--accent-4), var(--extra-color-2));
+}
+.bg-gradient-python {
+  background: linear-gradient(45deg, var(--python-color), var(--accent-1));
+}
+.bg-gradient-csharp {
+  background: linear-gradient(45deg, var(--csharp-color), var(--accent-2));
+}
+.bg-gradient-js {
+  background: linear-gradient(45deg, var(--js-color), var(--accent-2));
+}

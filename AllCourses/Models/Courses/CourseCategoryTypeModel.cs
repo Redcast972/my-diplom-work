@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AllCourses.Models.Courses
+namespace Hexagon.Models.Courses
 {
     public class CourseCategoryTypeModel
     {

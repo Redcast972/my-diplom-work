@@ -1,9 +1,9 @@
-﻿using AllCourses.Domain;
-using AllCourses.Domain.Entites.ApplicationsForTeaching;
-using AllCourses.Domain.Entites.Courses;
-using AllCourses.Domain.Repositories.Abstract;
-using AllCourses.Models.Courses;
-using AllCourses.Models.News;
+﻿using Hexagon.Domain;
+using Hexagon.Domain.Entites.ApplicationsForTeaching;
+using Hexagon.Domain.Entites.Courses;
+using Hexagon.Domain.Repositories.Abstract;
+using Hexagon.Models.Courses;
+using Hexagon.Models.News;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -13,15 +13,15 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace AllCourses.Controllers
+namespace Hexagon.Controllers
 {
     public class CoursesController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly IApplicationsForTeachingRepository _applicationsForTeachingRepository;
         private readonly ICourseCategoryTypeRepository _courseCategoryTypeRepository;
-        private AllCoursesDbContext _context;
-        public CoursesController(IApplicationsForTeachingRepository applicationsForTeachingRepository, UserManager<IdentityUser> userMgr, ICourseCategoryTypeRepository courseCategoryTypeRepository, AllCoursesDbContext context)  
+        private HexagonDbContext _context;
+        public CoursesController(IApplicationsForTeachingRepository applicationsForTeachingRepository, UserManager<IdentityUser> userMgr, ICourseCategoryTypeRepository courseCategoryTypeRepository, HexagonDbContext context)  
         {
             _applicationsForTeachingRepository = applicationsForTeachingRepository; 
             userManager = userMgr;
