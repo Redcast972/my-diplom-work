@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hexagon", "AllCourses\Hexagon.csproj", "{7E7F5693-6869-4D7A-A370-65CAF1DA638A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hexagon", "Hexagon\Hexagon.csproj", "{7E7F5693-6869-4D7A-A370-65CAF1DA638A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
