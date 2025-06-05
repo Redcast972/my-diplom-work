@@ -1,13 +1,13 @@
 :root {
-  --accent-1: #6C63FF;
-  --accent-2: #4ECDC4;
-  --accent-3: #F7B733;
-  --accent-4: #FF6B6B;
-  --extra-color-1: #36D1DC;
-  --extra-color-2: #5B86E5;
-  --python-color: #FFD43B;
-  --csharp-color: #9B4F96;
-  --js-color: #F0DB4F;
+  --accent-1: #1A73E8; /* primary blue */
+  --accent-2: #4CAF50; /* skillfactory green */
+  --accent-3: #FFC107; /* amber */
+  --accent-4: #E91E63; /* pink */
+  --extra-color-1: #8BC34A; /* light green */
+  --extra-color-2: #00BCD4; /* cyan */
+  --python-color: #FFD54F;
+  --csharp-color: #9C27B0;
+  --js-color: #FFEB3B;
 }
 
 /* Background gradient utilities */
@@ -28,4 +28,8 @@
 }
 .bg-gradient-js {
   background: linear-gradient(45deg, var(--js-color), var(--accent-2));
+}
+
+body {
+  font-family: 'Inter', sans-serif;
 }
