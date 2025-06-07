@@ -1,0 +1,23 @@
+@* Dashboard layout with sidebar navigation *@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Hexagon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
+</head>
+<body class="font-sans bg-slate-900 text-gray-200 min-h-screen flex">
+    <aside class="w-64 p-4 space-y-2 bg-white/10 backdrop-blur-lg hidden md:block">
+        <nav class="space-y-1">
+            <a asp-controller="Home" asp-action="Index" class="block px-2 py-1 rounded hover:bg-accent-pink/20">Dashboard</a>
+            <a asp-controller="Users" asp-action="Index" class="block px-2 py-1 rounded hover:bg-accent-violet/20">Users</a>
+            <a asp-controller="Products" asp-action="Index" class="block px-2 py-1 rounded hover:bg-accent-cyan/20">Products</a>
+        </nav>
+    </aside>
+    <main class="flex-1 p-6">
+        @RenderBody()
+    </main>
+</body>
+</html>
