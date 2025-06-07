@@ -12,6 +12,8 @@
   --python-color: #FFD43B;
   --csharp-color: #9B4F96;
   --js-color: #F0DB4F;
+  --background-dark: #0f172a;
+  --foreground-dark: #e2e8f0;
 }
 
 .glass {
@@ -19,6 +21,11 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Background gradient utilities */
@@ -39,4 +46,9 @@
 }
 .bg-gradient-js {
   background: linear-gradient(45deg, var(--js-color), var(--accent-2));
+}
+
+body.dark {
+  background-color: var(--background-dark);
+  color: var(--foreground-dark);
 }
