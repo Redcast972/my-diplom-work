@@ -1,13 +1,20 @@
 :root {
-  --accent-1: #6C63FF;
-  --accent-2: #4ECDC4;
-  --accent-3: #F7B733;
-  --accent-4: #FF6B6B;
+  --accent-1: #ff2d8b;
+  --accent-2: #a043ff;
+  --accent-3: #17d4fc;
+  --accent-4: #ff6bcb;
   --extra-color-1: #36D1DC;
   --extra-color-2: #5B86E5;
   --python-color: #FFD43B;
   --csharp-color: #9B4F96;
   --js-color: #F0DB4F;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Background gradient utilities */
