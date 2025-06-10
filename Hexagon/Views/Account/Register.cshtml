@@ -1,21 +1,21 @@
 ﻿@using Hexagon.Models.Register
 @model RegisterViewModel; 
 @{
-    Layout = null;
+    Layout = "_LoginLayout";
 }
 
 <link href="~/css/output.css" rel="stylesheet" />
 
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-gray-50">
+<div class="min-h-screen flex items-center justify-center bg-gradient bg-blur text-gray-900">
 
-    <div class="max-w-md w-full bg-white shadow-lg rounded-2xl p-8 space-y-8 transform transition-all hover:shadow-2xl">
-        <h2 class="text-center text-3xl font-extrabold text-gray-900">
+    <div class="max-w-md w-full bg-white bg-blur glass shadow-lg rounded-2xl p-8 space-y-8 transform transition-all hover:shadow-2xl">
+        <h2 class="text-center text-3xl font-extrabold text-accent-pink">
             Регистрация
         </h2>
         <form asp-controller="Account" asp-action="Register" method="post" class="mt-8 space-y-6">
             <div class="rounded-md shadow-sm space-y-4">
                 <div>
-                    <label asp-for="UserName" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="UserName" class="block text-sm font-medium text-gray-200">
                         Логин
                     </label>
                     <input asp-for="UserName" type="text" 
@@ -25,7 +25,7 @@
                 </div>
 
                 <div>
-                    <label asp-for="Email" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="Email" class="block text-sm font-medium text-gray-200">
                         Электронная почта
                     </label>
                     <input asp-for="Email" type="email" 
@@ -35,7 +35,7 @@
                 </div>
 
                 <div>
-                    <label asp-for="Password" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="Password" class="block text-sm font-medium text-gray-200">
                         Пароль
                     </label>
                     <input asp-for="Password" type="password" 
@@ -45,7 +45,7 @@
                 </div>
 
                 <div>
-                    <label asp-for="ConfirmPassword" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="ConfirmPassword" class="block text-sm font-medium text-gray-200">
                         Подтвердите пароль
                     </label>
                     <input asp-for="ConfirmPassword" type="password" 
@@ -57,14 +57,14 @@
 
             <div>
                 <button type="submit"
-                        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out">
+                        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-accent-pink hover:bg-accent-darkpink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out">
                     Зарегистрироваться
                 </button>
             </div>
         </form>
-        <p class="mt-2 text-center text-sm text-gray-600">
+        <p class="mt-2 text-center text-sm text-gray-200">
             Уже есть аккаунт?
-            <a asp-controller="Account" asp-action="Login" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a asp-controller="Account" asp-action="Login" class="font-medium text-accent-cyan">
                 Войти
             </a>
         </p>

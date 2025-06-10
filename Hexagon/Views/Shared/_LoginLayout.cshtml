@@ -1,0 +1,41 @@
+﻿@using Hexagon.Domain.Repositories.Abstract
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hexagon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
+</head>
+<body class="font-sans bg-slate-900 text-gray-200 min-h-screen relative overflow-x-hidden">
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+        <div class="absolute w-96 h-96 bg-accent-pink rounded-full opacity-30 blur-3xl animate-float -top-20 -left-20"></div>
+        <div class="absolute w-96 h-96 bg-accent-violet rounded-full opacity-30 blur-3xl animate-float top-1/3 -right-24"></div>
+        <div class="absolute w-96 h-96 bg-accent-cyan rounded-full opacity-30 blur-3xl animate-float -bottom-20 left-1/3"></div>
+    </div>
+    <div class="">
+        <main class="">
+            @RenderBody()
+        </main>
+    </div>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const profileMenu = document.getElementById("profile-menu-toggle");
+        const dropdown = document.getElementById("profile-dropdown");
+
+        document.addEventListener("click", function (event) {
+            if (profileMenu.contains(event.target)) {
+                dropdown.classList.toggle("hidden");
+            } else {
+                dropdown.classList.add("hidden");
+            }
+        });
+    });
+</script>
+
+</html>

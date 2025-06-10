@@ -6,11 +6,11 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <h1 class="text-3xl font-bold text-600 mb-6">Категории курсов</h1>
-    <div class="w-full max-w-[1300px] bg-white p-4 rounded-lg shadow-md">
+    <div class="w-full max-w-[1300px] bg-blur glass p-4 rounded-lg shadow-md">
         <div class="overflow-x-auto">
-            <table class="w-full border-collapse text-sm text-gray-700">
+            <table class="w-full border-collapse text-sm text-gray-200">
                 <thead>
-                    <tr class="border-b bg-gray-100 text-left">
+                    <tr class="border-b bg-blur glass text-left rounded-5">
                         <th class="p-4 font-semibold">Действия</th>
                         <th class="p-4 font-semibold">Айди категории</th>
                         <th class="p-4 font-semibold">Название категории</th>
@@ -21,16 +21,11 @@
                     
                     @foreach (var item in Model)
                     {
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="p-4"><a href="/courses/category-types/delete/@item.Id" class="text-blue-600">Удалить</a></td>
+                        <tr class="border-b hover:bg-blur">
+                            <td class="p-4"><a href="/courses/category-types/delete/@item.Id" class="text-accent-pink">Удалить</a></td>
                             <td class="p-4">@item.Id</td>
                             <td class="p-4">@item.CourseCategoryType</td>
                             
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <hr class="border-t border-gray-100">
-                            </td>
                         </tr>
                     }
                 </tbody>

@@ -12,17 +12,17 @@
 
         @if (User.IsInRole("student"))
         {
-            <a href="/courses/get-access-to-create-courses" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
+            <a href="/courses/get-access-to-create-courses" class="bg-accent-pink text-white px-6 py-3 rounded-lg shadow-md hover:bg-accent-darkpink transition">
                 Создать курс
             </a>
         }
 
         @if (User.IsInRole("admin"))
         {
-            <a href="/courses/category-types" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
+            <a href="/courses/category-types" class="bg-accent-pink text-white px-6 py-3 rounded-lg shadow-md hover:bg-accent-darkpink transition">
                 Категории курсов
             </a>
-            <a href="/courses/category-types/add" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">
+            <a href="/courses/category-types/add" class="bg-accent-pink text-white px-6 py-3 rounded-lg shadow-md hover:bg-accent-darkpink transition">
                 Добавить новую категорию
             </a>
         }

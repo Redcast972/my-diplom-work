@@ -1,22 +1,74 @@
 ﻿@using Hexagon.Models.Login
 @model LoginViewModel
 @{
-    Layout = null;
+    Layout = "_LoginLayout";
+    ViewData["Title"] = "Авторизация";
 }
+<style>
+    .checkbox-hidden {
+        display: none;
+    }
 
+    /* Стили для кастомного чекбокса (label) */
+    .checkbox-custom {
+        position: relative;
+        width: 20px; /* h-5 w-5 из Tailwind */
+        height: 20px;
+        background-color: white;
+        border: 1px solid #d1d5db; /* border-gray-300 */
+        border-radius: 0.375rem; /* rounded */
+        cursor: pointer;
+        transition: all 300ms ease-in-out; /* transition duration-300 */
+    }
+
+        /* Hover-эффект */
+        .checkbox-custom:hover {
+            background-color: rgba(0, 188, 212, 0.2); /* hover:bg-accent-cyan/20 */
+        }
+
+    /* Стили при активации чекбокса */
+    .checkbox-hidden:checked + .checkbox-custom {
+        background-color: #ff69b4; /* peer-checked:bg-accent-pink */
+        border-color: transparent; /* peer-checked:border-transparent */
+    }
+
+    /* SVG-галочка */
+    .checkbox-custom svg {
+        position: absolute;
+        width: 16px; /* w-4 */
+        height: 16px; /* h-4 */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        stroke: white; /* text-white */
+        opacity: 0; /* opacity-0 */
+        transition: opacity 300ms ease-in-out;
+    }
+
+    /* Показ галочки при активации */
+    .checkbox-hidden:checked + .checkbox-custom svg {
+        opacity: 1; /* peer-checked:opacity-100 */
+    }
+
+    /* Фокус-кольцо */
+    .checkbox-hidden:focus + .checkbox-custom {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5); /* focus:ring-indigo-500 */
+    }
+</style>
 <link href="~/css/output.css" rel="stylesheet" />
 
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-gray-50">
+<div class="min-h-screen flex items-center justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-    <div class="max-w-md w-full bg-white shadow-lg rounded-2xl p-8 space-y-8 transform transition-all hover:shadow-2xl">
-        <h2 class="text-center text-3xl font-extrabold text-gray-900">
+    <div class="max-w-md w-full bg-white bg-blur glass shadow-lg rounded-2xl p-8 space-y-8 transform transition-all hover:shadow-2xl">
+        <h2 class="text-center text-3xl font-extrabold text-accent-pink">
             Авторизация
         </h2>
 
         <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewBag.returnUrl" method="post" class="mt-8 space-y-6">
             <div class="rounded-md shadow-sm space-y-4">
                 <div>
-                    <label asp-for="UserName" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="UserName" class="block text-sm font-medium text-gray-200">
                         Логин
                     </label>
                     <input
@@ -26,7 +78,7 @@
                     <span class="text-red-600" asp-validation-for="UserName"></span>
                 </div>
                 <div>
-                    <label asp-for="Password" class="block text-sm font-medium text-gray-700">
+                    <label asp-for="Password" class="block text-sm font-medium text-gray-200">
                         Пароль
                     </label>
                     <input
@@ -38,17 +90,17 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
-                        <input
-                               asp-for="RememberMe"
-                               type="checkbox"
-                               class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded transition duration-300">
-                        <label asp-for="RememberMe" class="ml-2 text-sm font-medium text-gray-700 hover:text-indigo-600 transition duration-300">
-                            Запомнить меня
+                        <input asp-for="RememberMe" type="checkbox" id="RememberMe" class="checkbox-hidden">
+                        <label for="RememberMe" class="checkbox-custom">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
                         </label>
+                        <label for="RememberMe" class="ml-2 text-sm font-medium text-gray-200">Запомнить меня</label>
                         <span asp-validation-for="RememberMe"></span>
                     </div>
                     <div>
-                        <a asp-controller="Auth" asp-action="ForgotPassword" class="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition duration-300">
+                        <a asp-controller="Auth" asp-action="ForgotPassword" class="text-sm font-medium text-accent-cyan hover:text-indigo-500 transition duration-300">
                             Забыли пароль?
                         </a>
                     </div>
@@ -56,14 +108,14 @@
             </div>
             <div>
                 <button type="submit"
-                        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out">
+                        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-accent-pink hover:bg-accent-darkpink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out">
                     Войти
                 </button>
             </div>
         </form>
-        <p class="mt-2 text-center text-sm text-gray-600">
+        <p class="mt-2 text-center text-sm text-gray-200">
             У вас нет аккаунта?
-            <a asp-controller="Account" asp-action="Register" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a asp-controller="Account" asp-action="Register" class="font-medium text-accent-cyan hover:text-indigo-500 transition duration-300">
                 Зарегистрируйтесь
             </a>
         </p>
